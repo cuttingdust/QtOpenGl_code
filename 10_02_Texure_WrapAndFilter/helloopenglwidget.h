@@ -4,14 +4,14 @@
 #include <QWidget>
 
 #include <QOpenGLWidget>
-#include <QOpenGLExtraFunctions>
+#include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
 
 #include <QTimer>
 #include <QImage>
 
-class HelloOpenGLWidget : public QOpenGLWidget,  QOpenGLExtraFunctions
+class HelloOpenGLWidget : public QOpenGLWidget,  QOpenGLFunctions
 {
     Q_OBJECT
 public:
@@ -43,6 +43,7 @@ private:
     QOpenGLShaderProgram shaderProgram_;
     QOpenGLTexture* textureWall_;
     QOpenGLTexture* textureSmile_;
+    QOpenGLTexture* textureSmall_;
     
 };
 

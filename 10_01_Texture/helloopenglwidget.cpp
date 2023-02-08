@@ -65,7 +65,13 @@ void HelloOpenGLWidget::initializeGL()
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+   
     textureWall_ = new QOpenGLTexture(QImage(":image/images/wall.jpg").mirrored());
+    textureSmile_ = new QOpenGLTexture(QImage(":image/images/awesomeface.png").mirrored());
+    
+    shaderProgram_.bind();
+    shaderProgram_.setUniformValue("textureWall", 0);
+    shaderProgram_.setUniformValue("textureSmile", 1);
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArrayAPPLE(0);
@@ -89,7 +95,8 @@ void HelloOpenGLWidget::paintGL()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     switch (shape_) {
         case Rect:
-            textureWall_->bind();
+            textureWall_->bind(0);
+            textureSmile_->bind(1);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0/* &indices */);
             break;
         case Circle:
