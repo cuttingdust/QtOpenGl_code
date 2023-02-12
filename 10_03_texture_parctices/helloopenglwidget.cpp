@@ -1,5 +1,6 @@
 #include "helloopenglwidget.h"
 #include <QTime>
+#include <QKeyEvent>
 
 unsigned int VBO, VAO, EBO;
 
@@ -16,10 +17,12 @@ unsigned int indices[] = {
     1, 2, 3 /// second triangle
 };
 
+float gRatio = 0.5f;
+
 HelloOpenGLWidget::HelloOpenGLWidget(QWidget *parent)
 : QOpenGLWidget{parent}
 {
-
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 void HelloOpenGLWidget::initializeGL()
@@ -64,7 +67,10 @@ void HelloOpenGLWidget::initializeGL()
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-   
+    
+    
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     textureWall_ = new QOpenGLTexture(QImage(":image/images/wall.jpg").mirrored());
     textureSmile_ = new QOpenGLTexture(QImage(":image/images/awesomeface.png").mirrored());
     textureSmall_ = new QOpenGLTexture(QImage(":image/images/small.png").mirrored());
@@ -78,11 +84,11 @@ void HelloOpenGLWidget::initializeGL()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArrayAPPLE(0);
     
-    textureSmall_->bind(2);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    textureSmile_->bind(1);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     
 }
 
@@ -90,7 +96,7 @@ void HelloOpenGLWidget::resizeGL(int w, int h)
 {
     Q_UNUSED(w);
     Q_UNUSED(h);
-//    glViewport(0, 0, w, h);
+    glViewport(0, 0, w, h);
 }
 
 void HelloOpenGLWidget::paintGL()
@@ -99,17 +105,13 @@ void HelloOpenGLWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     shaderProgram_.bind();
+    shaderProgram_.setUniformValue("ratio", gRatio);
     glBindVertexArrayAPPLE(VAO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     switch (shape_) {
         case Rect:
         {
             textureSmall_->bind(2);
-
-//            float boderColor[] = {1.0f, 1.0f, 0.0f, 1.0f};
-//            glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, boderColor);
-//             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-//             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
             
             // glActiveTexture(GL_TEXTURE0);
              textureWall_->bind(0);
@@ -162,6 +164,36 @@ void HelloOpenGLWidget::setWireframe(bool wireframe) {
     doneCurrent();
     update();
 }
+
+void HelloOpenGLWidget::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Up:
+            gRatio += 0.1f;
+            break;
+        case Qt::Key_Down:
+            gRatio -= 0.1f;
+            break;
+            
+        default:
+            break;
+    };
+    
+    if (gRatio > 1) {
+        gRatio = 1;
+    }
+    
+    if (gRatio < 0) {
+        gRatio = 0;
+    }
+    
+    shaderProgram_.bind();
+    shaderProgram_.setUniformValue("ratio", gRatio);
+    update();
+    
+}
+
 
 
 
