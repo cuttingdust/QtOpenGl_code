@@ -1,14 +1,12 @@
 #version 120
 
-attribute vec3 aPos;
-attribute vec3 aColor;
-attribute vec2 aTexCord;
+attribute vec3 a_vertex;
+attribute vec2 a_texcoord;
 
-varying vec3 ourColor;
-varying vec2 TexCord;
+varying vec2 v_texcoord;
+
 void main()
 {
-  gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-  ourColor = aColor;
-  TexCord = vec2(1 - aTexCord.s, aTexCord.t);
+  gl_Position = vec4(a_vertex.x, a_vertex.y, a_vertex.z, 1.0);
+  v_texcoord = vec2(1 - a_texcoord.s, a_texcoord.t);
 }

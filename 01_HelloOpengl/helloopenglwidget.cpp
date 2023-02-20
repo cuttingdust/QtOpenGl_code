@@ -9,9 +9,9 @@ float vertices[] = {
 };
 
 const char *vertexShaderSource =
-"attribute vec3 aPos;\n"
+"attribute vec3 a_vertex;\n"
 "void main(){\n"
-"  gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"  gl_Position = vec4(a_vertex.x, a_vertex.y, a_vertex.z, 1.0);\n"
 "}\n\0";
 
 

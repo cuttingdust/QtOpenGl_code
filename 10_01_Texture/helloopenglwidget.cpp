@@ -4,13 +4,15 @@
 unsigned int VBO, VAO, EBO;
 
 float vertices[] = {
-    // positions      // colors        // texture coords
-    0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-    0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-    -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f // top left
-    
+    /// first triangle
+    0.5f, 0.5f, 0.0f, 1.0f, 1.0f,   /// top right
+    0.5f, -0.5f, 0.0f,  1.0f, 0.0f,  /// bottom right
+    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, /// bottom left
+    -0.5f, 0.5f, 0.0f, 0.0f, 1.0f /// top left
+   
 };
+
+
 
 unsigned int indices[] = {
     0, 1, 3, /// first triangle
@@ -26,6 +28,7 @@ HelloOpenGLWidget::HelloOpenGLWidget(QWidget *parent)
 void HelloOpenGLWidget::initializeGL()
 {
     initializeOpenGLFunctions();
+    
     
     shaderProgram_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shader/shapes.vs");
     shaderProgram_.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shader/shapes.fs");
@@ -48,32 +51,30 @@ void HelloOpenGLWidget::initializeGL()
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     /// 告知显卡如何解析缓冲里的属性值
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     /// 开启VAO管理的第一个属性值
     glEnableVertexAttribArray(0);
-    
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-
-
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
     
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
    
     textureWall_ = new QOpenGLTexture(QImage(":image/images/wall.jpg").mirrored());
     textureSmile_ = new QOpenGLTexture(QImage(":image/images/awesomeface.png").mirrored());
-    
+
     shaderProgram_.bind();
     shaderProgram_.setUniformValue("textureWall", 0);
     shaderProgram_.setUniformValue("textureSmile", 1);
     
+    
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArrayAPPLE(0);
     
 }

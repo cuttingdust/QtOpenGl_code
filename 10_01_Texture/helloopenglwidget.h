@@ -44,6 +44,9 @@ private:
     QOpenGLTexture* textureWall_;
     QOpenGLTexture* textureSmile_;
     
+    
+    
+    
 };
 
 #endif // HELLOOPENGLWIDGET_H

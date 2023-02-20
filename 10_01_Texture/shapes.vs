@@ -1,14 +1,13 @@
 #version 120
 
-attribute vec3 aPos;
-attribute vec3 aColor;
-attribute vec2 aTexCord;
+attribute vec4 a_vertex;
+attribute vec2 a_texcoord; //纹理坐标
 
-varying vec3 ourColor;
-varying vec2 TexCord;
+varying vec2 v_texcoord; //2d纹理坐标
+
+
 void main()
 {
-  gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-  ourColor = aColor;
-  TexCord = aTexCord;
+  gl_Position = a_vertex;
+  v_texcoord = a_texcoord;
 }

@@ -32,10 +32,10 @@ QMenuBar {
    <widget class="HelloOpenGLWidget" name="openGLWidget">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>140</y>
-      <width>300</width>
-      <height>200</height>
+      <x>-11</x>
+      <y>-1</y>
+      <width>811</width>
+      <height>561</height>
      </rect>
     </property>
    </widget>
