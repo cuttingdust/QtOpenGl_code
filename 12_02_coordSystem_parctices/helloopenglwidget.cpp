@@ -142,7 +142,8 @@ void HelloOpenGLWidget::initializeGL()
     glBindVertexArrayAPPLE(0);
     
     QMatrix4x4 projection;
-    projection.perspective(45,(float)width()/height(),0.1,100);
+//    projection.perspective(60,(float)width()/(2 * height()),0.1,100);
+    projection.perspective(60,(float)width()/ height(),0.1,100);
     shaderProgram_.setUniformValue("projection", projection);
     
 }
@@ -158,10 +159,11 @@ void HelloOpenGLWidget::paintGL()
 {
     QMatrix4x4 model;
     QMatrix4x4 view;
-    
+    int i  = 0;
     unsigned int time=QTime::currentTime().msec();
     view.translate(0.0f, 0.0f, -3.0f);
     
+//    glViewport(0, 0, width() / 2, height());
     
     
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -186,7 +188,10 @@ void HelloOpenGLWidget::paintGL()
             foreach (auto item, cubePositions) {
                 model.setToIdentity();
                 model.translate(item);
-                model.rotate(time, 1.0f, 5.0f, 0.5f);
+                if (i++ % 3 == 0) {
+                    model.rotate(time, 1.0f, 5.0f, 0.5f);
+                }
+               
                 shaderProgram_.setUniformValue("model", model);
                 glDrawArrays(GL_TRIANGLES,0,36);
             }
