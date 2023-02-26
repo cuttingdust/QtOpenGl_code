@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>le.ico</file>
+        <file>images/awesomeface.png</file>
+        <file>images/wall.jpg</file>
+        <file>images/small.png</file>
+    </qresource>
+    <qresource prefix="/shader">
+        <file>shapes.vs</file>
+        <file>shapes.fs</file>
+    </qresource>
+</RCC>
