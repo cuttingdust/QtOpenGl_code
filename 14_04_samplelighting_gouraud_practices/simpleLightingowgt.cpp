@@ -9,6 +9,7 @@ unsigned  int lightVAO;
 QVector3D gLightPos(1.2f, 1.0f, 2.0f);
 QVector3D gLightColor(1.0f, 1.0f, 1.0f);
 QVector3D gObjectColor(1.0f, 0.5f, 0.31f);
+QVector3D gViewInitPos(0.0,0.0,5.0);
 
 float vertices[] = {
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -217,19 +218,30 @@ void SimpleLightingOWgt::setWireframe(bool wireframe) {
     update();
 }
 
-void SimpleLightingOWgt::keyPressEvent(QKeyEvent *event)
-{
-    float deltaTime= TIMEOUTSEC/ 1000.0;
-    switch (event->key())
-    {
+void SimpleLightingOWgt::keyPressEvent(QKeyEvent *event) {
+    float deltaTime = TIMEOUTSEC / 1000.0;
+    switch (event->key()) {
         case Qt::Key_W:
-            camera_.processKeyboard(FORWARD, deltaTime);break;
+            camera_.processKeyboard(FORWARD, deltaTime);
+            break;
         case Qt::Key_S:
-            camera_.processKeyboard(BACKWARD, deltaTime);break;
+            camera_.processKeyboard(BACKWARD, deltaTime);
+            break;
         case Qt::Key_D:
-            camera_.processKeyboard(RIGHT, deltaTime);break;
+            camera_.processKeyboard(RIGHT, deltaTime);
+            break;
         case Qt::Key_A:
-            camera_.processKeyboard(LEFT, deltaTime);break;
+            camera_.processKeyboard(LEFT, deltaTime);
+            break;
+        case Qt::Key_Q:
+            camera_.processKeyboard(DOWN, deltaTime);
+            break;
+        case Qt::Key_E:
+            camera_.processKeyboard(UP, deltaTime);
+            break;
+        case Qt::Key_Space:
+            camera_.setPosition(gViewInitPos);
+            break;
         default:
             break;
     };
@@ -242,14 +254,14 @@ void SimpleLightingOWgt::slotUpdateTimer() {
 }
 
 void SimpleLightingOWgt::mouseMoveEvent(QMouseEvent *event) {
+    if(event->buttons() & Qt::RightButton){
+        static QPoint lastPos(width()/2,height()/2);
+        auto currentPos=event->pos();
+        QPoint deltaPos=currentPos-lastPos;
+        lastPos=currentPos;
 
-    static  QPoint lastPos(width()/ 2, height()/ 2);
-    auto currentPos = event->pos();
-    gDeltaPos = currentPos - lastPos;
-    lastPos = currentPos;
-
-    camera_.processMouseMovement(gDeltaPos.x(), -gDeltaPos.y());
-    update();
+        camera_.processMouseMovement(deltaPos.x(),-deltaPos.y());
+    }
 
     QWidget::mouseMoveEvent(event);
 }
