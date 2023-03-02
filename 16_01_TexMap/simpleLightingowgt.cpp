@@ -187,8 +187,8 @@ void SimpleLightingOWgt::paintGL()
     shaderProgram_.setUniformValue("viewPos",camera_.getPosition());
 
     shaderProgram_.setUniformValue("material.shininess", 64.0f);
-    shaderProgram_.setUniformValue("light.ambient", 1.0f, 1.0f, 1.0f);
-    shaderProgram_.setUniformValue("light.diffuse", 1.0f, 1.0f, 1.0f);
+    shaderProgram_.setUniformValue("light.ambient", 0.2f, 0.2f, 0.2f);
+    shaderProgram_.setUniformValue("light.diffuse", 0.6f, 0.6f, 0.6f);
     shaderProgram_.setUniformValue("light.specular", 1.0f, 1.0f, 1.0f);
 
     model.setToIdentity();

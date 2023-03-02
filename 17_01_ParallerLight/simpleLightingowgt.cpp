@@ -187,31 +187,22 @@ void SimpleLightingOWgt::paintGL()
     specularTexture_->bind(1);
     emissionTexture_->bind(2);
 
-    model.setToIdentity();
-//    model.rotate(time, 1.0f, 1.0f, 0.5f);
     glBindVertexArrayAPPLE(VAO);
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-//    glDrawArrays(GL_TRIANGLES,0,36);
-
-    QVector3D diffuseColor = gLightColor *QVector3D(0.5,0.5,0.5);
-    QVector3D ambientColor = diffuseColor *QVector3D(0.2,0.2,0.2);
-    shaderProgram_.bind();
-    shaderProgram_.setUniformValue("projection", projection);
-    shaderProgram_.setUniformValue("view", view);
-//    shaderProgram_.setUniformValue("model", model);
-
     /// positions all containers
     for(unsigned int i = 0; i < 10; i++) {
         QMatrix4x4 model;
         model.translate(gCubePositions[i]);
         float angle = 20.0f * i;
         model.rotate(angle, QVector3D(1.0f, 0.3f, 0.5f));
-        shaderProgram_.setUniformValue("model", model);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
+        shaderProgram_.bind();
+        shaderProgram_.setUniformValue("model", model);
     }
 
-
+    shaderProgram_.bind();
+    shaderProgram_.setUniformValue("projection", projection);
+    shaderProgram_.setUniformValue("view", view);
     shaderProgram_.setUniformValue("lightPos",gLightPos);
     shaderProgram_.setUniformValue("viewPos",camera_.getPosition());
 
