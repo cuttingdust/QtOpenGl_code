@@ -71,17 +71,17 @@ QVector3D gCubePositions[] = {
 };
 
 QVector3D gPointLightPositions[] = {
+        QVector3D( 0.7f, 0.2f, 2.0f),
+        QVector3D( 2.3f, -3.3f, -4.0f),
+        QVector3D(-4.0f, 2.0f, -12.0f),
+        QVector3D( 0.0f, 0.0f, -3.0f)
+};
+
+QVector3D gPointLightColors[] = {
         QVector3D(0.1f, 0.1f, 0.1f),
         QVector3D(0.1f, 0.1f, 0.1f),
         QVector3D(0.1f, 0.1f, 0.1f),
         QVector3D(0.3f, 0.1f, 0.1f)
-};
-
-QVector3D gPointLightColors[] = {
-        QVector3D(1.0f, 1.0f, 0.0f),
-        QVector3D(0.3f, 0.3f, 0.7f),
-        QVector3D(0.0f, 0.0f, 0.3f),
-        QVector3D(0.4f, 0.4f, 0.4f)
 };
 
 unsigned int indices[] = { // note that we start from 0!

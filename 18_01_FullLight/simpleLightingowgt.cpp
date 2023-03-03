@@ -277,8 +277,6 @@ void SimpleLightingOWgt::paintGL()
     lightShaderProgram_.bind();
     lightShaderProgram_.setUniformValue("projection", projection);
     lightShaderProgram_.setUniformValue("view", view);
-    lightShaderProgram_.setUniformValue("model", model);
-    lightShaderProgram_.setUniformValue("lightColor", gLightColor);
 }
 
 SimpleLightingOWgt::~SimpleLightingOWgt() noexcept {

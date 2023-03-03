@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SimpleLighting",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SimpleLighting::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SimpleLighting-Debug-55b8c0728bcf861ffc8e.json",
+					"name" : "SimpleLighting",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SimpleLighting_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SimpleLighting_autogen-Debug-4403dcb7d0f62efedf1b.json",
+					"name" : "SimpleLighting_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SimpleLighting_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SimpleLighting_autogen_timestamp_deps-Debug-d082fc7c7fa3f7b83cda.json",
+					"name" : "SimpleLighting_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/handabao/MyFile/code/QtOpengl/19_01_ChangEnv/cmake-build-debug",
+		"source" : "/Users/handabao/MyFile/code/QtOpengl/19_01_ChangEnv"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

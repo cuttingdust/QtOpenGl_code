@@ -1,0 +1,5 @@
+/Users/handabao/MyFile/code/QtOpengl/19_01_ChangEnv/cmake-build-debug/CMakeFiles/SimpleLighting.dir
+/Users/handabao/MyFile/code/QtOpengl/19_01_ChangEnv/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/handabao/MyFile/code/QtOpengl/19_01_ChangEnv/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/handabao/MyFile/code/QtOpengl/19_01_ChangEnv/cmake-build-debug/CMakeFiles/SimpleLighting_autogen_timestamp_deps.dir
+/Users/handabao/MyFile/code/QtOpengl/19_01_ChangEnv/cmake-build-debug/CMakeFiles/SimpleLighting_autogen.dir
