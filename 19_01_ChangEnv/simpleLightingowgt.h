@@ -1,5 +1,5 @@
-#ifndef HELLOOPENGLWIDGET_H
-#define HELLOOPENGLWIDGET_H
+#ifndef __SIMPLELIGHTINGOWGT_H__
+#define __SIMPLELIGHTINGOWGT_H__
 
 #include "environmentsettingdialog.h"
 #include "camera.h"
