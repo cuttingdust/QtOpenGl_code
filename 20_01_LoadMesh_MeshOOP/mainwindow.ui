@@ -93,6 +93,7 @@ QMenuBar {
    </attribute>
    <addaction name="actionDebug"/>
    <addaction name="actionEnvSetting"/>
+   <addaction name="actionLoadModel"/>
    <addaction name="actionWireFrameView"/>
   </widget>
   <action name="actionWireFrameView">
@@ -113,12 +114,17 @@ QMenuBar {
     <string>环境设置</string>
    </property>
   </action>
+  <action name="actionLoadModel">
+   <property name="text">
+    <string>模型加载</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>ModelLoadingOWgt</class>
    <extends>QOpenGLWidget</extends>
-   <header location="global">simpleLightingowgt.h</header>
+   <header location="global">modelloadingowgt.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
