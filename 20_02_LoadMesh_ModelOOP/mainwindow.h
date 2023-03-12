@@ -22,6 +22,7 @@ protected slots:
     void slotWireframeView();
     void slotEnvSetting();
     void slotLoadModel();
+    void slotShowLights();
 
 };
 #endif // MAINWINDOW_H

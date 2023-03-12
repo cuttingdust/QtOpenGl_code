@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui_->actionWireFrameView, SIGNAL(triggered()), this, SLOT(slotWireframeView()));
     connect(ui_->actionEnvSetting, SIGNAL(triggered()), this, SLOT(slotEnvSetting()));
     connect(ui_->actionLoadModel, SIGNAL(triggered()), this, SLOT(slotLoadModel()));
+    connect(ui_->actionShowLights, SIGNAL(triggered()), this, SLOT(slotShowLights()));
 }
 
 void MainWindow::slotWireframeView()
@@ -34,7 +35,13 @@ void MainWindow::slotEnvSetting() {
 
 void MainWindow::slotLoadModel() {
     QString str = QFileDialog::getOpenFileName(this,"选择模型文件","",
-                                             "OBJ (*.obj);;FBX(*.fbx);;ALL FILES( *.* ) ");
+                                             "OBJ (*.obj);;PLY (*.ply);;FBX(*.fbx);;STL (*.stl);;ALL FILES( *.* ) ");
     ui_->openGLWidget->loadModel(str.toStdString());
+}
+
+void MainWindow::slotShowLights() {
+
+    auto bShowLight = ui_->openGLWidget->isBShowLights();
+    ui_->openGLWidget->setBShowLights(!bShowLight);
 }
 

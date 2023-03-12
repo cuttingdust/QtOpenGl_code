@@ -95,6 +95,7 @@ QMenuBar {
    <addaction name="actionEnvSetting"/>
    <addaction name="actionLoadModel"/>
    <addaction name="actionWireFrameView"/>
+   <addaction name="actionShowLights"/>
   </widget>
   <action name="actionWireFrameView">
    <property name="checkable">
@@ -117,6 +118,11 @@ QMenuBar {
   <action name="actionLoadModel">
    <property name="text">
     <string>模型加载</string>
+   </property>
+  </action>
+  <action name="actionShowLights">
+   <property name="text">
+    <string>显示灯光组</string>
    </property>
   </action>
  </widget>

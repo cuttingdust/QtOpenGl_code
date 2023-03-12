@@ -2,7 +2,7 @@
 #define __MESH_H__
 
 #include <QOpenGLShaderProgram>
-#include <QOpenGLFunctions>
+#include <QOpenGLFunctions_4_1_Core>
 #include <string>
 #include <vector>
 
@@ -18,13 +18,17 @@ struct Texture {
     std::string path_;
 };
 
+static int gCount = 0;
+
 class Mesh {
 public:
-    Mesh(QOpenGLFunctions *glFuns
+    Mesh(QOpenGLFunctions_4_1_Core *glFuns
             , std::vector<Vertex> vertices
             , std::vector<unsigned int> indices
             , std::vector<Texture> textures
     );
+
+    ~Mesh();
 
 public:
     void Draw(QOpenGLShaderProgram &shader);
@@ -37,10 +41,10 @@ public:
 
 private:
     // render data
-    unsigned int VAO, VBO, EBO;
+    unsigned int VAO_, VBO_, EBO_;
     void setupMesh();
 private:
-    QOpenGLFunctions *glFuns_;
+    QOpenGLFunctions_4_1_Core *glFuns_;
 };
 
 #endif

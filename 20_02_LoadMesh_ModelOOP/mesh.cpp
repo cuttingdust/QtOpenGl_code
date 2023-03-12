@@ -1,6 +1,6 @@
 #include "mesh.h"
 
-Mesh::Mesh(QOpenGLFunctions *glFuns
+Mesh::Mesh(QOpenGLFunctions_4_1_Core *glFuns
            , std::vector<Vertex> vertices
            , std::vector<unsigned int> indices
            , std::vector<Texture> textures)
@@ -15,12 +15,12 @@ Mesh::Mesh(QOpenGLFunctions *glFuns
 void Mesh::setupMesh()
 {
     /// 创建VBO和VAO对象，并赋予ID
-    glGenVertexArrays(1, &VAO);
-    glFuns_->glGenBuffers(1, &VBO);
+    glFuns_->glGenVertexArrays(1, &VAO_);
+    glFuns_->glGenBuffers(1, &VBO_);
 
     /// 绑定VBO和VAO对象
-    glBindVertexArray(VAO);
-    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glFuns_->glBindVertexArray(VAO_);
+    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, VBO_);
 
     /// 为当前绑定到target的缓冲区对象创建一个新的数据存储。
     /// 如果data不是NULL，则使用来自此指针的数据初始化数据存储
@@ -37,8 +37,8 @@ void Mesh::setupMesh()
     glFuns_->glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, normal_)));
     glFuns_->glEnableVertexAttribArray(2);
 
-    glFuns_->glGenBuffers(1,&EBO);
-    glFuns_->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glFuns_->glGenBuffers(1,&EBO_);
+    glFuns_->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_);
     glFuns_->glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                           indices_.size() * sizeof(unsigned int),&indices_[0], GL_STATIC_DRAW);
 }
@@ -64,7 +64,13 @@ void Mesh::Draw(QOpenGLShaderProgram &shader)
         glFuns_->glBindTexture(GL_TEXTURE_2D, textures_[i].id_);
     }
 
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glFuns_->glBindVertexArray(this->VAO_);
+    glFuns_->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO_);
     glFuns_->glDrawElements(GL_TRIANGLES,indices_.size(),GL_UNSIGNED_INT,0);
+}
+
+Mesh::~Mesh() {
+    glFuns_->glDeleteVertexArrays(1, &VAO_);
+    glFuns_->glDeleteBuffers(1, &VBO_);
+    glFuns_->glDeleteBuffers(1, &EBO_);
 }

@@ -1,24 +1,23 @@
 #ifndef __MODEL_H__
 #define __MODEL_H__
 
-#include "mesh.h"
-
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
+#include "abstractModel.h"
 
 #include <QOpenGLTexture>
 
-class Model {
+class Model : public AbstractModel{
 public:
-    Model(QOpenGLFunctions *glfuns, const char *path);
+    Model(QOpenGLFunctions_4_1_Core *glfuns, const char *path);
+    ~Model();
+
 public:
-    void Draw(QOpenGLShaderProgram &shader);
+    void Draw(QOpenGLShaderProgram &shader) override;
 private:
     void loadModel(const std::string& path);
-    void processNode(aiNode *node, const aiScene *scene);
-    Mesh processMesh(aiMesh *mesh, const aiScene *scene);
+    void processNode(aiNode *node, const aiScene *scene) override;
+    Mesh* processMesh(aiMesh *mesh, const aiScene *scene) override;
     std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+    void loadMaterialTextures(const std::string& filePath, std::string typeName);
     unsigned int TextureFromFile(const char *path, const std::string &directory);
 
 public:
@@ -30,9 +29,9 @@ public:
 
 private:
     // model data
-    QOpenGLFunctions *glFuns_;
+    QOpenGLFunctions_4_1_Core *glFuns_;
     std::string directory_;
-    std::vector<Mesh> meshes_;
+    std::vector<Mesh*> meshes_;
 
 };
 
