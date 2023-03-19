@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>le.ico</file>
+        <file>images/awesomeface.png</file>
+        <file>images/wall.jpg</file>
+        <file>images/small.png</file>
+        <file>texMap/container2_specular.png</file>
+        <file>texMap/container2.png</file>
+        <file>texMap/lighting_maps_specular_color.png</file>
+        <file>texMap/matrix.jpg</file>
+    </qresource>
+    <qresource prefix="/shader">
+        <file>shapes.vert</file>
+        <file>shapes.frag</file>
+    </qresource>
+    <qresource prefix="/lighting">
+        <file>lighting.vert</file>
+        <file>lighting.frag</file>
+    </qresource>
+    <qresource prefix="/outline">
+        <file>outline.vert</file>
+        <file>outline.frag</file>
+    </qresource>
+</RCC>
