@@ -31,4 +31,8 @@
         <file>windows.vert</file>
         <file>windows.frag</file>
     </qresource>
+    <qresource prefix="/frambuffer">
+        <file>frambuffer.vert</file>
+        <file>frambuffer.frag</file>
+    </qresource>
 </RCC>

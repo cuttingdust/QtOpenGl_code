@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "depthtestdialog.h"
+#include "frambufferdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui_->actionDrawVegetation, SIGNAL(triggered()), this, SLOT(slotDrawVegetation()));
     connect(ui_->actionDrawWindows, SIGNAL(triggered()), this, SLOT(slotDrawWindows()));
     connect(ui_->actionDrawFramBuffer, SIGNAL(triggered()), this, SLOT(slotDrawFramBuffer()));
+    connect(ui_->actionSelectFrambufferType, SIGNAL(triggered()), this, SLOT(slotSelectFramBufferType()));
     connect(ui_->openGLWidget,&ModelLoadingOWgt::signalMousePickingPos,
             this, &MainWindow::slotMousePickingPos);
 
@@ -109,5 +111,14 @@ void MainWindow::slotDrawWindows() {
 void MainWindow::slotDrawFramBuffer() {
     auto bDrawFramBuffer = ui_->openGLWidget->isBDrawFramBuffer();
     ui_->openGLWidget->setBDrawFramBuffer(!bDrawFramBuffer);
+}
+
+void MainWindow::slotSelectFramBufferType() {
+    auto dlg = new FrambufferDialog(this);
+    dlg->setFbType(ui_->openGLWidget->getFbType());
+    if(dlg->exec()==QDialog::Accepted){
+        ui_->openGLWidget->setFbtSettingType(dlg->getFbType());
+    }
+    delete dlg;
 }
 

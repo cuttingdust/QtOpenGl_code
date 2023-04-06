@@ -45,6 +45,8 @@ std::vector<QVector3D> gPointLightColorsHorror = {
         QVector3D(0.3f, 0.1f, 0.1f)
 };
 
+int gFrambuffer = 0;
+
 std::vector<QVector3D> gPointLightColorsBiochemicalLab = {
         QVector3D(1.0f, 0.6f, 0.0f),
         QVector3D(1.0f, 0.0f, 0.0f),
@@ -70,6 +72,7 @@ ModelLoadingOWgt::ModelLoadingOWgt(QWidget *parent) :
     elapsedTimer_.start();
 
     setEnvSettingType(ET_DESERT);
+    setFbtSettingType(FT_DEFAULT);
     setTestFuncType(DepthFuncType::DFT_LESS);
     camera_.setPosition(gViewInitPos);
 }
@@ -116,6 +119,13 @@ void ModelLoadingOWgt::initializeGL() {
     bSucess = windowsShaderProgram_.link();
     if (!bSucess) {
         qWarning() << __FUNCTION__ << " " << windowsShaderProgram_.log();
+    }
+
+    frambufferShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/frambuffer/frambuffer.vert");
+    frambufferShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/frambuffer/frambuffer.frag");
+    bSucess = frambufferShaderProgram_.link();
+    if (!bSucess) {
+        qWarning() << __FUNCTION__ << " " << frambufferShaderProgram_.log();
     }
 
     ::glEnable(GL_CULL_FACE);
@@ -165,8 +175,8 @@ void ModelLoadingOWgt::paintGL() {
 
     if (aGlass_ && bDrawFramBuffer_)
     {
-        drawWindowsShaderProgram(projection, view);
-        aGlass_->Draw(windowsShaderProgram_);
+        drawFrambufferShaderProgram(projection, view);
+        aGlass_->Draw(frambufferShaderProgram_);
 
         drawObject();
     }
@@ -734,6 +744,72 @@ bool ModelLoadingOWgt::isBDrawFramBuffer() const {
 
 void ModelLoadingOWgt::setBDrawFramBuffer(bool bDrawFramBuffer) {
     bDrawFramBuffer_ = bDrawFramBuffer;
+}
+
+void ModelLoadingOWgt::drawFrambufferShaderProgram(QMatrix4x4 projection, QMatrix4x4 view) {
+    frambufferShaderProgram_.bind();
+    frambufferShaderProgram_.setUniformValue("projection", projection);
+    frambufferShaderProgram_.setUniformValue("view", view);
+    frambufferShaderProgram_.setUniformValue("lightPos", gLightPos);
+    frambufferShaderProgram_.setUniformValue("viewPos", camera_.getPosition());
+
+    frambufferShaderProgram_.setUniformValue("material.shininess", 32.0f);
+    frambufferShaderProgram_.setUniformValue("spotLight.position", camera_.getPosition());
+    frambufferShaderProgram_.setUniformValue("spotL˜ight.direction", camera_.getFront());
+    frambufferShaderProgram_.setUniformValue("spotLight.cutOff", static_cast<float>(cos(12.5f * M_PI / 180)));
+    frambufferShaderProgram_.setUniformValue("spotLight.outerCutOff", (float) cos(17.5f * M_PI / 180));
+    frambufferShaderProgram_.setUniformValue("spotLight.ambient", 0.4f, 0.4f, 0.4f);
+    frambufferShaderProgram_.setUniformValue("spotLight.diffuse", 0.9f, 0.9f, 0.9f);
+    frambufferShaderProgram_.setUniformValue("spotLight.specular", 1.0f, 1.0f, 1.0f);
+    frambufferShaderProgram_.setUniformValue("spotLight.constant", 1.0f);
+    frambufferShaderProgram_.setUniformValue("spotLight.linear", 0.09f);
+    frambufferShaderProgram_.setUniformValue("spotLight.quadratic", 0.032f);
+
+    // directional light
+    frambufferShaderProgram_.setUniformValue("dirLight.direction", -0.2f, -1.0f, -0.3f);
+    frambufferShaderProgram_.setUniformValue("dirLight.ambient", dirlightAmbient_);
+    frambufferShaderProgram_.setUniformValue("dirLight.diffuse", dirlightDiffuse_);
+    frambufferShaderProgram_.setUniformValue("dirLight.specular", dirlightSpecular_);
+
+    /// Depth Z Buffer Test
+    frambufferShaderProgram_.setUniformValue("bSimpleZBudder", bDepthTestShader_);
+
+    // point lights
+    for (int i = 0; i < 4; i++) {
+        QString iStr = "pointLights[" + QString::number(i) + "].position";
+        frambufferShaderProgram_.setUniformValue(iStr.toStdString().c_str(), gPointLightPositions[i].x(),
+                                              gPointLightPositions[i].y(), gPointLightPositions[i].z());
+        iStr = "pointLights[" + QString::number(i) + "].ambient";
+        frambufferShaderProgram_.setUniformValue(iStr.toStdString().c_str(), gPointLightColors[i].x() * 0.1,
+                                              gPointLightColors[i].y() * 0.1, gPointLightColors[i].z() * 0.1);
+        iStr = "pointLights[" + QString::number(i) + "].diffuse";
+        frambufferShaderProgram_.setUniformValue(iStr.toStdString().c_str(), gPointLightColors[i].x(), gPointLightColors[i].y(),
+                                              gPointLightColors[i].z());
+        iStr = "pointLights[" + QString::number(i) + "].specular";
+        frambufferShaderProgram_.setUniformValue(iStr.toStdString().c_str(), gPointLightColors[i].x(), gPointLightColors[i].y(),
+                                              gPointLightColors[i].z());
+        iStr = "pointLights[" + QString::number(i) + "].constant";
+        frambufferShaderProgram_.setUniformValue(iStr.toStdString().c_str(), 1.0f);
+        iStr = "pointLights[" + QString::number(i) + "].linear";
+        frambufferShaderProgram_.setUniformValue(iStr.toStdString().c_str(), 0.09f);
+        iStr = "pointLights[" + QString::number(i) + "].quadratic";
+        frambufferShaderProgram_.setUniformValue(iStr.toStdString().c_str(), 0.032f);
+    }
+}
+
+void ModelLoadingOWgt::setFbtSettingType(FrambufferType type) {
+    setFbType(type);
+    gFrambuffer = static_cast<int> (fbType_);
+    frambufferShaderProgram_.bind();
+    frambufferShaderProgram_.setUniformValue("frambufferType", gFrambuffer);
+}
+
+FrambufferType ModelLoadingOWgt::getFbType() const {
+    return fbType_;
+}
+
+void ModelLoadingOWgt::setFbType(FrambufferType fbType) {
+    fbType_ = fbType;
 }
 
 

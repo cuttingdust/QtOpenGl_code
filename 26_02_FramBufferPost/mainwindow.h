@@ -26,6 +26,7 @@ protected slots:
     void slotDrawVegetation();
     void slotDrawWindows();
     void slotDrawFramBuffer();
+    void slotSelectFramBufferType();
     void slotZbufferShader();
     void slotMousePickingPos(QVector3D pos);
     void slotStenCil();

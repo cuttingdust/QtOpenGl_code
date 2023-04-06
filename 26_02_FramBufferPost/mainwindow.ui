@@ -102,7 +102,9 @@ QMenuBar {
    <addaction name="actionDrawPlane"/>
    <addaction name="actionDrawWindows"/>
    <addaction name="actionDrawVegetation"/>
+   <addaction name="separator"/>
    <addaction name="actionDrawFramBuffer"/>
+   <addaction name="actionSelectFrambufferType"/>
    <addaction name="separator"/>
    <addaction name="actionDebug"/>
    <addaction name="actionDepthTestShader"/>
@@ -176,6 +178,11 @@ QMenuBar {
   <action name="actionDrawFramBuffer">
    <property name="text">
     <string>DrawFramBuffer</string>
+   </property>
+  </action>
+  <action name="actionSelectFrambufferType">
+   <property name="text">
+    <string>SelectFrambufferType</string>
    </property>
   </action>
  </widget>

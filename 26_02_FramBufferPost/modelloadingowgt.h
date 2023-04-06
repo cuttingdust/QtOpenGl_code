@@ -12,6 +12,7 @@
 #include "vegetationModel.h"
 #include "windowsModel.h"
 #include "glassModel.h"
+#include "frambufferdialog.h"
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions_4_1_Core>
@@ -45,6 +46,7 @@ public:
 public:
     void setWireframe(bool wireframe);
     void setEnvSettingType(EnvironmentType type);
+    void setFbtSettingType(FrambufferType type);
     void loadModel(const std::string path);
 public:
     EnvironmentType getViewEnvType() const;
@@ -77,6 +79,9 @@ public:
     bool isBDrawFramBuffer() const;
     void setBDrawFramBuffer(bool bDrawFramBuffer);
 
+    FrambufferType getFbType() const;
+    void setFbType(FrambufferType fbType);
+
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
@@ -98,6 +103,7 @@ private:
     void drawShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
     void drawVegetationShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
     void drawWindowsShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
+    void drawFrambufferShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
     void drawOutlineShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
     QVector4D worldPosFromViewPort(int posX,int posY);
 private:
@@ -106,6 +112,7 @@ private:
     QOpenGLShaderProgram outlineShaderProgram_;
     QOpenGLShaderProgram vegetationShaderProgram_;
     QOpenGLShaderProgram windowsShaderProgram_;
+    QOpenGLShaderProgram frambufferShaderProgram_;
     QTimer updateTimer_;
     QElapsedTimer elapsedTimer_;
     Camera camera_;
@@ -115,6 +122,9 @@ private:
     QVector3D dirlightDiffuse_;
     QVector3D dirlightSpecular_;
     EnvironmentType viewEnvType_;
+    FrambufferType fbType_;
+
+private:
     DepthFuncType testFuncType_;
     GLenum testFunc_;
 

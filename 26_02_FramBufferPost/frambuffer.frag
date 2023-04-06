@@ -61,34 +61,14 @@ uniform vec3 viewPos;
 
 uniform bool bSimpleZBudder;
 
+uniform int frambufferType;
+
 vec4 diffuseTex = texture(material.diffuse, v_texcoord);
 vec4 specularTex = texture(material.specular, v_texcoord);
-vec3 CalcKenerl(sampler2D textureSample);
+vec3 CalcKenerl(sampler2D textureSample, float[9] kernelParam);
 
-/// 1
-//vec3 diffuseTexColor = vec3(diffuseTex);
-//vec3 specularTexColor = vec3(specularTex);
-
-/// 2
-//vec3 diffuseTexColor = vec3(1.0 - diffuseTex);
-//vec3 specularTexColor = vec3(1.0 - specularTex);
-
-/// 3
-//float diffAverge = (diffuseTex.r + diffuseTex.g + diffuseTex.b) / 3.0;
-//vec3 diffuseTexColor = vec3(diffAverge, diffAverge, diffAverge);
-//float speAverge = (specularTex.r + specularTex.g + specularTex.b) / 3.0;
-//vec3 specularTexColor = vec3(speAverge, speAverge, speAverge);
-
-/// 4
-//float diffAverge = (diffuseTex.r * 0.2126 + diffuseTex.g * 0.7152 + diffuseTex.b * 0.0722) / 3.0;
-//vec3 diffuseTexColor = vec3(diffAverge, diffAverge, diffAverge);
-//float speAverge = (specularTex.r * 0.2126 + specularTex.g * 0.7152 + specularTex.b * 0.0722) / 3.0;
-//vec3 specularTexColor = vec3(speAverge, speAverge, speAverge);
-
-/// 5
 vec3 diffuseTexColor;
 vec3 specularTexColor;
-
 
 float near = 0.1;
 float far = 100.0;
@@ -101,12 +81,58 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
 float LinearizeDepth(float depth);
 
-
-
 void main()
 {
-    diffuseTexColor = CalcKenerl(material.diffuse);
-    specularTexColor = CalcKenerl(material.specular);
+    if (frambufferType == 0)
+    {
+        /// 1
+        diffuseTexColor = vec3(diffuseTex);
+        specularTexColor = vec3(specularTex);
+    }
+    else if (frambufferType == 1)
+    {
+        /// 2
+        diffuseTexColor = vec3(1.0 - diffuseTex);
+        specularTexColor = vec3(1.0 - specularTex);
+    }
+    else if (frambufferType == 2)
+    {
+        /// 3
+        float diffAverge = (diffuseTex.r + diffuseTex.g + diffuseTex.b) / 3.0;
+        diffuseTexColor = vec3(diffAverge, diffAverge, diffAverge);
+        float speAverge = (specularTex.r + specularTex.g + specularTex.b) / 3.0;
+        specularTexColor = vec3(speAverge, speAverge, speAverge);
+    }
+    else if (frambufferType == 3)
+    {
+        /// 4
+        float diffAverge = (diffuseTex.r * 0.2126 + diffuseTex.g * 0.7152 + diffuseTex.b * 0.0722) / 3.0;
+        diffuseTexColor = vec3(diffAverge, diffAverge, diffAverge);
+        float speAverge = (specularTex.r * 0.2126 + specularTex.g * 0.7152 + specularTex.b * 0.0722) / 3.0;
+        specularTexColor = vec3(speAverge, speAverge, speAverge);
+    }
+    else if (frambufferType == 4)
+    {
+        float kernel[9] = float[](
+            -1, -1, -1,
+            -1, 9, -1,
+            -1, -1, -1
+        );
+
+        diffuseTexColor = CalcKenerl(material.diffuse, kernel);
+        specularTexColor = CalcKenerl(material.specular, kernel);
+    }
+    else if (frambufferType == 5)
+    {
+        float kernel[9] = float[](
+            1.0 / 16, 2.0 / 16, 1.0 / 16,
+            2.0 / 16, 4.0 / 16, 2.0 / 16,
+            1.0 / 16, 2.0 / 16, 1.0 / 16
+        );
+        diffuseTexColor = CalcKenerl(material.diffuse, kernel);
+        specularTexColor = CalcKenerl(material.specular, kernel);
+    }
+
 
     vec3 norm = normalize(v_normal);
     vec3 viewDir = normalize(viewPos - v_vertex);
@@ -121,8 +147,6 @@ void main()
     if (!bSimpleZBudder)
     {
         FragColor = vec4(result, diffuseTex.a);
-//        FragColor = vec4(CalcKenerl(material.diffuse), diffuseTex.a);
-
     }
     else
     {
@@ -213,7 +237,7 @@ float LinearizeDepth(float depth) {
     return (2.0 * near * far) / (far + near - z_ndc  * (far - near));
 }
 
-vec3 CalcKenerl(sampler2D textureSample)
+vec3 CalcKenerl(sampler2D textureSample, float[9] kernelParam)
 {
     vec2 offsets[9] = vec2[](
         vec2(-offset, offset), // top-left
@@ -227,19 +251,6 @@ vec3 CalcKenerl(sampler2D textureSample)
         vec2( offset, -offset) // bottom-right
     );
 
-//    float kernel[9] = float[](
-//        1.0 / 16, 2.0 / 16, 1.0 / 16,
-//        2.0 / 16, 4.0 / 16, 2.0 / 16,
-//        1.0 / 16, 2.0 / 16, 1.0 / 16
-//    );
-    /// 4
-
-    float kernel[9] = float[](
-        -1, -1, -1,
-        -1, 9, -1,
-        -1, -1, -1
-    );
-
     vec3 sampleTex[9];
     for(int i = 0; i < 9; i++) {
         sampleTex[i] = vec3(texture(textureSample, v_texcoord.st + offsets[i]));
@@ -247,7 +258,7 @@ vec3 CalcKenerl(sampler2D textureSample)
 
     vec3 col = vec3(0.0);
     for(int i = 0; i < 9; i++)
-    col += sampleTex[i] * kernel[i];
+    col += sampleTex[i] * kernelParam[i];
 
     return col;
 }
