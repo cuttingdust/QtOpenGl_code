@@ -146,7 +146,11 @@ void ModelLoadingOWgt::paintGL() {
     projection.setToIdentity();
 
     glClearColor(clearColor_.x(), clearColor_.y(), clearColor_.z(), 1.0f);
-    aGlass_->bindFramer();
+
+    if (aGlass_ && bDrawFramBuffer_)
+    {
+        aGlass_->bindFramer();
+    }
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(testFunc_);
     glEnable(GL_STENCIL_TEST);
@@ -195,46 +199,46 @@ void ModelLoadingOWgt::drawObject() {
     if (!modelsMap_.empty()) {
 
         drawOutlineShaderProgram(projection, view);
-                foreach(auto modelInfo, modelsMap_) {
-                model.setToIdentity();
-                model.translate(modelInfo.worldPos);
+        foreach(auto modelInfo, modelsMap_) {
+            model.setToIdentity();
+            model.translate(modelInfo.worldPos);
 
-                model.rotate(modelInfo.pitch, QVector3D(1.0, 0.0, 0.0));
-                model.rotate(modelInfo.yaw, QVector3D(0.0, 1.0, 0.0));
-                model.rotate(modelInfo.roll, QVector3D(0.0, 0.0, 1.0));
+            model.rotate(modelInfo.pitch, QVector3D(1.0, 0.0, 0.0));
+            model.rotate(modelInfo.yaw, QVector3D(0.0, 1.0, 0.0));
+            model.rotate(modelInfo.roll, QVector3D(0.0, 0.0, 1.0));
 
-                glStencilFunc(GL_ALWAYS, 1, 0xFF);
-                glStencilMask(0xFF);
+            glStencilFunc(GL_ALWAYS, 1, 0xFF);
+            glStencilMask(0xFF);
 
-                shaderProgram_.bind();
-                shaderProgram_.setUniformValue("model", model);
+            shaderProgram_.bind();
+            shaderProgram_.setUniformValue("model", model);
 
-                modelInfo.model->Draw(shaderProgram_);
-                shaderProgram_.release();
+            modelInfo.model->Draw(shaderProgram_);
+            shaderProgram_.release();
 
-                if (modelInfo.isSelected == false || !bStencil_)
-                    continue;
-                glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-                glStencilMask(0x00);
+            if (modelInfo.isSelected == false || !bStencil_)
+                continue;
+            glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+            glStencilMask(0x00);
 
-                float height = modelInfo.model->maxY_ - modelInfo.model->minY_;
-                float width = modelInfo.model->maxX_ - modelInfo.model->minX_;
-                if (modelInfo.model->minY_ >= 0)
-                    model.translate(0.0f, height / 2, 0.0f);
+            float height = modelInfo.model->maxY_ - modelInfo.model->minY_;
+            float width = modelInfo.model->maxX_ - modelInfo.model->minX_;
+            if (modelInfo.model->minY_ >= 0)
+                model.translate(0.0f, height / 2, 0.0f);
 
-                model.scale(1.1f, 1.0 + 0.1 * (width / height));
+            model.scale(1.1f, 1.0 + 0.1 * (width / height));
 
-                if (modelInfo.model->minY_ >= 0)
-                    model.translate(0.0f, -height / 2, 0.0f);
+            if (modelInfo.model->minY_ >= 0)
+                model.translate(0.0f, -height / 2, 0.0f);
 
-                outlineShaderProgram_.bind();
-                outlineShaderProgram_.setUniformValue("model", model);
+            outlineShaderProgram_.bind();
+            outlineShaderProgram_.setUniformValue("model", model);
 
-                modelInfo.model->Draw(outlineShaderProgram_);
-                outlineShaderProgram_.release();
-                glStencilMask(0xFF);
-                glStencilFunc(GL_ALWAYS, 1, 0xFF);
-            }
+            modelInfo.model->Draw(outlineShaderProgram_);
+            outlineShaderProgram_.release();
+            glStencilMask(0xFF);
+            glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        }
     }
 
     if (aWindows_ && bDrawWindows_)
