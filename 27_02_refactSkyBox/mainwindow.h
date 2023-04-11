@@ -31,7 +31,8 @@ protected slots:
     void slotMousePickingPos(QVector3D pos);
     void slotStenCil();
     void slotOpenSkyBox();
-    void slotReflecxtionSkyBox();
+    void slotReflectionSkyBox();
+    void slotRefractionSkyBox();
 
 private:
     Ui::MainWindow *ui_;

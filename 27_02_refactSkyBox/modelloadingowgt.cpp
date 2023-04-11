@@ -67,7 +67,7 @@ ModelLoadingOWgt::ModelLoadingOWgt(QWidget *parent) :
         , bDrawWindows_(false)
         , bDrawFramBuffer_(false)
         , bOpenSkyBox_(false)
-        , bReflextionSkyBox_(false)
+        , bReflectionSkyBox_(false)
 {
     setFocusPolicy(Qt::StrongFocus);
     setMouseTracking(true);
@@ -144,6 +144,13 @@ void ModelLoadingOWgt::initializeGL() {
     bSucess = reflectionShaderProgram_.link();
     if (!bSucess) {
         qWarning() << __FUNCTION__ << " " << reflectionShaderProgram_.log();
+    }
+
+    refractionShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/refraction/refraction.vert");
+    refractionShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/refraction/refraction.frag");
+    bSucess = refractionShaderProgram_.link();
+    if (!bSucess) {
+        qWarning() << __FUNCTION__ << " " << refractionShaderProgram_.log();
     }
 
     ::glEnable(GL_CULL_FACE);
@@ -229,6 +236,7 @@ void ModelLoadingOWgt::drawObject() {
 
         drawOutlineShaderProgram(projection, view);
         drawrReflectionShaderProgram(projection, view);
+        drawrRefractionShaderProgram(projection, view);
         foreach(auto modelInfo, modelsMap_) {
             model.setToIdentity();
             model.translate(modelInfo.worldPos);
@@ -240,19 +248,26 @@ void ModelLoadingOWgt::drawObject() {
             glStencilFunc(GL_ALWAYS, 1, 0xFF);
             glStencilMask(0xFF);
 
-            if (bReflextionSkyBox_)
+            if (bReflectionSkyBox_)
             {
                 reflectionShaderProgram_.bind();
                 reflectionShaderProgram_.setUniformValue("model", model);
                 modelInfo.model->Draw(reflectionShaderProgram_);
                 reflectionShaderProgram_.release();
             }
+            else if (bRefractionSkyBox_)
+            {
+                refractionShaderProgram_.bind();
+                refractionShaderProgram_.setUniformValue("model", model);
+                modelInfo.model->Draw(refractionShaderProgram_);
+                refractionShaderProgram_.release();
+            }
             else
             {
-            shaderProgram_.bind();
-            shaderProgram_.setUniformValue("model", model);
-            modelInfo.model->Draw(shaderProgram_);
-            shaderProgram_.release();
+                shaderProgram_.bind();
+                shaderProgram_.setUniformValue("model", model);
+                modelInfo.model->Draw(shaderProgram_);
+                shaderProgram_.release();
             }
 
             if (!modelInfo.isSelected || !bStencil_)
@@ -867,12 +882,27 @@ void ModelLoadingOWgt::drawrReflectionShaderProgram(QMatrix4x4 projection, QMatr
     reflectionShaderProgram_.setUniformValue("viewPos",camera_.getPosition());
 }
 
-bool ModelLoadingOWgt::isBReflextionSkyBox() const {
-    return bReflextionSkyBox_;
+[[maybe_unused]] bool ModelLoadingOWgt::isBReflectionSkyBox() const {
+    return bReflectionSkyBox_;
 }
 
-void ModelLoadingOWgt::setBReflextionSkyBox(bool bReflextionSkyBox) {
-    bReflextionSkyBox_ = bReflextionSkyBox;
+void ModelLoadingOWgt::setBReflectionSkyBox(bool bReflectionSkyBox) {
+    bReflectionSkyBox_ = bReflectionSkyBox;
+}
+
+void ModelLoadingOWgt::drawrRefractionShaderProgram(QMatrix4x4 projection, QMatrix4x4 view) {
+    refractionShaderProgram_.bind();
+    refractionShaderProgram_.setUniformValue("projection", projection);
+    refractionShaderProgram_.setUniformValue("view", view);
+    refractionShaderProgram_.setUniformValue("viewPos",camera_.getPosition());
+}
+
+[[maybe_unused]] bool ModelLoadingOWgt::isBRefractionSkyBox() const {
+    return bRefractionSkyBox_;
+}
+
+void ModelLoadingOWgt::setBRefractionSkyBox(bool bRefractionSkyBox) {
+    bRefractionSkyBox_ = bRefractionSkyBox;
 }
 
 

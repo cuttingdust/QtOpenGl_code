@@ -86,8 +86,11 @@ public:
     [[maybe_unused]] bool isBOpenSkyBox() const;
     void setBOpenSkyBox(bool bOpenSkyBox);
 
-    bool isBReflextionSkyBox() const;
-    void setBReflextionSkyBox(bool bReflextionSkyBox);
+    [[maybe_unused]] bool isBReflectionSkyBox() const;
+    void setBReflectionSkyBox(bool bReflectionSkyBox);
+
+    [[maybe_unused]] bool isBRefractionSkyBox() const;
+    void setBRefractionSkyBox(bool bRefractionSkyBox);
 
 protected:
     void initializeGL() override;
@@ -113,6 +116,7 @@ private:
     void drawFrambufferShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
     void drawOutlineShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
     void drawrReflectionShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
+    void drawrRefractionShaderProgram(QMatrix4x4 projection, QMatrix4x4 view);
     QVector4D worldPosFromViewPort(int posX,int posY);
 private:
     QOpenGLShaderProgram shaderProgram_;
@@ -123,6 +127,7 @@ private:
     QOpenGLShaderProgram frambufferShaderProgram_;
     QOpenGLShaderProgram skyBoxShaderProgram_;
     QOpenGLShaderProgram reflectionShaderProgram_;
+    QOpenGLShaderProgram refractionShaderProgram_;
     QTimer updateTimer_;
     QElapsedTimer elapsedTimer_;
     Camera camera_;
@@ -158,9 +163,8 @@ private:
     bool bDrawFramBuffer_;
 
     bool bOpenSkyBox_;
-    bool bReflextionSkyBox_;
-
-
+    bool bReflectionSkyBox_;
+    bool bRefractionSkyBox_;
 
 
 private:

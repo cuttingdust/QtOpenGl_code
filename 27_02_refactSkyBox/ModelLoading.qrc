@@ -49,4 +49,8 @@
         <file>reflection.vert</file>
         <file>reflection.frag</file>
     </qresource>
+    <qresource prefix="/refraction">
+        <file>refraction.vert</file>
+        <file>refraction.frag</file>
+    </qresource>
 </RCC>

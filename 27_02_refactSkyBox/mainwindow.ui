@@ -108,6 +108,7 @@ QMenuBar {
    <addaction name="separator"/>
    <addaction name="actionOpenSkyBox"/>
    <addaction name="actionReflectIonSkyBox"/>
+   <addaction name="actionReflractionSkyBox"/>
    <addaction name="separator"/>
    <addaction name="actionDebug"/>
    <addaction name="actionDepthTestShader"/>
@@ -202,6 +203,14 @@ QMenuBar {
    </property>
    <property name="text">
     <string>ReflectIonSkyBox</string>
+   </property>
+  </action>
+  <action name="actionReflractionSkyBox">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>ReflractionSkyBox</string>
    </property>
   </action>
  </widget>

@@ -26,7 +26,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui_->openGLWidget,&ModelLoadingOWgt::signalMousePickingPos,
             this, &MainWindow::slotMousePickingPos);
     connect(ui_->actionOpenSkyBox, SIGNAL(triggered()), this, SLOT(slotOpenSkyBox()));
-    connect(ui_->actionReflectIonSkyBox, SIGNAL(triggered()), this, SLOT(slotReflecxtionSkyBox()));
+    connect(ui_->actionReflectIonSkyBox, SIGNAL(triggered()), this, SLOT(slotReflectionSkyBox()));
+    connect(ui_->actionReflractionSkyBox, SIGNAL(triggered()), this, SLOT(slotRefractionSkyBox()));
 }
 
 void MainWindow::slotWireframeView()
@@ -126,7 +127,12 @@ void MainWindow::slotOpenSkyBox() {
     ui_->openGLWidget->setBOpenSkyBox(ui_->actionOpenSkyBox->isChecked());
 }
 
-void MainWindow::slotReflecxtionSkyBox() {
-    ui_->openGLWidget->setBReflextionSkyBox(ui_->actionReflectIonSkyBox->isChecked());
+void MainWindow::slotReflectionSkyBox() {
+    ui_->actionReflractionSkyBox->setChecked(false);
+    ui_->openGLWidget->setBReflectionSkyBox(ui_->actionReflectIonSkyBox->isChecked());
 }
 
+void MainWindow::slotRefractionSkyBox() {
+    ui_->actionReflectIonSkyBox->setChecked(false);
+    ui_->openGLWidget->setBRefractionSkyBox(ui_->actionReflractionSkyBox->isChecked());
+}
