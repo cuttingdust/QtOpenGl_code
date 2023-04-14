@@ -1,0 +1,26 @@
+# ninja log v5
+0	544	1681495129978995451	ModelLoading_autogen/timestamp	7022bafde16d8de7
+0	544	1681495129978995451	ModelLoading_autogen/mocs_compilation.cpp	7022bafde16d8de7
+0	544	1681495129978995451	/Users/handabao/MyFile/code/QtOpengl/29_01_UBOUpdate/cmake-build-debug/ModelLoading_autogen/timestamp	7022bafde16d8de7
+0	544	1681495129978995451	/Users/handabao/MyFile/code/QtOpengl/29_01_UBOUpdate/cmake-build-debug/ModelLoading_autogen/mocs_compilation.cpp	7022bafde16d8de7
+544	820	1681495130262531858	ModelLoading_autogen/EWIEGA46WW/qrc_ModelLoading.cpp	e2fb17ba55366076
+544	820	1681495130262531858	/Users/handabao/MyFile/code/QtOpengl/29_01_UBOUpdate/cmake-build-debug/ModelLoading_autogen/EWIEGA46WW/qrc_ModelLoading.cpp	e2fb17ba55366076
+821	1437	1681495130875116638	CMakeFiles/ModelLoading.dir/frambufferdialog.cpp.o	716e0032fff8945c
+821	1444	1681495130883657312	CMakeFiles/ModelLoading.dir/environmentsettingdialog.cpp.o	8d48f6cce212d9d6
+821	1498	1681495130936233422	CMakeFiles/ModelLoading.dir/depthtestdialog.cpp.o	a7f8fbb089cbfbd1
+821	1512	1681495130951152412	CMakeFiles/ModelLoading.dir/cubemodel.cpp.o	37a60da6bcb8427b
+822	1513	1681495130951034080	CMakeFiles/ModelLoading.dir/lightmodel.cpp.o	1ba9f4614e030037
+1439	1986	1681495131422839335	CMakeFiles/ModelLoading.dir/main.cpp.o	2f0bb0ba314d7b45
+821	2013	1681495131446437623	CMakeFiles/ModelLoading.dir/camera.cpp.o	390f7309832ab728
+820	2135	1681495131571269500	CMakeFiles/ModelLoading.dir/ModelLoading_autogen/mocs_compilation.cpp.o	7b1054816ba08709
+1498	2156	1681495131595602322	CMakeFiles/ModelLoading.dir/mesh.cpp.o	1cd6657d33387c0
+822	2199	1681495131634559305	CMakeFiles/ModelLoading.dir/glassModel.cpp.o	6bbeabe81a3e0f18
+1513	2272	1681495131711225032	CMakeFiles/ModelLoading.dir/model.cpp.o	f93fed98cbf3e0df
+2014	2585	1681495132024668962	CMakeFiles/ModelLoading.dir/skybox.cpp.o	cd39e2c35a0f14ca
+1986	2657	1681495132097158226	CMakeFiles/ModelLoading.dir/planemodel.cpp.o	1ea3ab7d791e48ce
+1444	2773	1681495132210684955	CMakeFiles/ModelLoading.dir/mainwindow.cpp.o	3ef953d87d986244
+2135	2808	1681495132248546197	CMakeFiles/ModelLoading.dir/vegetationModel.cpp.o	637b7174dcb692da
+1513	2903	1681495132341385530	CMakeFiles/ModelLoading.dir/modelloadingowgt.cpp.o	fb134f924226c199
+2156	3397	1681495132834844298	CMakeFiles/ModelLoading.dir/windowsModel.cpp.o	62f8954a4c7cc184
+2199	4689	1681495134125800641	CMakeFiles/ModelLoading.dir/ModelLoading_autogen/EWIEGA46WW/qrc_ModelLoading.cpp.o	1a4ee53999da61e
+4689	4820	1681495134261327422	bin/ModelLoading.app/Contents/MacOS/ModelLoading	45cc1ccc9a347ed1
