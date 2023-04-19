@@ -110,6 +110,9 @@ public:
     bool isBDrawExplode() const;
     void setBDrawExplode(bool bDrawExplode);
 
+    bool isBDrawInstancing() const;
+    void setBDrawInstancing(bool bDrawInstancing);
+
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
@@ -203,6 +206,7 @@ private:
     bool bReflectionSkyBox_;
     bool bRefractionSkyBox_;
     bool bReflectTexturteSkyBox_;
+    bool bDrawInstancing_;
 
 
 private:

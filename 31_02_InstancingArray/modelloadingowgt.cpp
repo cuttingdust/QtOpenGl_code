@@ -149,8 +149,6 @@ void ModelLoadingOWgt::paintGL() {
     view = camera_.getViewMatrix();
     projection.perspective(camera_.getZoom(), (float) width() / height(), gNear, gFar);
 
-    instancingShaderProgram_.bind();
-    aInstance_->Draw(instancingShaderProgram_);
 
     /// 填充数据
     fillUBOBufferData();
@@ -276,6 +274,11 @@ void ModelLoadingOWgt::drawObject() {
         aHouse_->Draw(houseShaderProgram_);
     }
 
+    if (aInstance_ && bDrawInstancing_)
+    {
+        instancingShaderProgram_.bind();
+        aInstance_->Draw(instancingShaderProgram_);
+    }
 
 }
 
@@ -1054,11 +1057,6 @@ void ModelLoadingOWgt::bindUBOBuffer() {
             glGetUniformBlockIndex(houseShaderProgram_.programId(),"Matrices");
     glUniformBlockBinding(houseShaderProgram_.programId(),
                           uniformBlockIndexHouseShader, 0);
-
-//    int uniformBlockIndexInstancingShader =
-//            glGetUniformBlockIndex(instancingShaderProgram_.programId(),"Matrices");
-//    glUniformBlockBinding(instancingShaderProgram_.programId(),
-//                          uniformBlockIndexInstancingShader, 0);
 }
 
 void ModelLoadingOWgt::enableGLFun() {
@@ -1132,6 +1130,14 @@ void ModelLoadingOWgt::slotShowNormalLength(int vau) {
 
 void ModelLoadingOWgt::setShowNormalDgVisible(bool bVis) {
     pShownormalDG_->setVisible(bVis);
+}
+
+bool ModelLoadingOWgt::isBDrawInstancing() const {
+    return bDrawInstancing_;
+}
+
+void ModelLoadingOWgt::setBDrawInstancing(bool bDrawInstancing) {
+    bDrawInstancing_ = bDrawInstancing;
 }
 
 

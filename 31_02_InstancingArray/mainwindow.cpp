@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui_->actionDrawHouse, SIGNAL(triggered()), this, SLOT(slotDrawHouse()));
     connect(ui_->actionDrawExplode, SIGNAL(triggered()), this, SLOT(slotDrawExplode()));
     connect(ui_->actionshowNormal, SIGNAL(triggered()), this, SLOT(slotShowNormal()));
+    connect(ui_->actionDrawInstancing, SIGNAL(triggered()), this, SLOT(slotDrawInstancing()));
 }
 
 void MainWindow::slotWireframeView()
@@ -167,4 +168,9 @@ void MainWindow::slotDrawExplode() {
 
 void MainWindow::slotShowNormal() {
     ui_->openGLWidget->setShowNormalDgVisible(ui_->actionshowNormal->isChecked());
+}
+
+void MainWindow::slotDrawInstancing() {
+    bool bDrawInstancing = ui_->openGLWidget->isBDrawInstancing();
+    ui_->openGLWidget->setBDrawInstancing(!bDrawInstancing);
 }

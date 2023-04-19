@@ -7,6 +7,7 @@ void InstancingModel::processNode(aiNode *node, const aiScene *scene)
     instancingMesh_ = processMesh(nullptr, nullptr);
     instancingMesh_->setBInstancing(true);
     instancingMesh_->setInstancingNum(100);
+    instancingMesh_->openInstancing();
 }
 
 Mesh* InstancingModel::processMesh(aiMesh *mesh, const aiScene *scene)

@@ -33,6 +33,8 @@ public:
 public:
     void setPel1(GLenum pel);
     void Draw(QOpenGLShaderProgram &shader);
+    void openInstancing();
+
 
     bool isBInstancing() const;
     void setBInstancing(bool bInstancing);
@@ -47,12 +49,11 @@ public:
     std::vector<Texture> textures_;
 
 private:
-    unsigned int instancingVBO_;
-
-    // render data
-    unsigned int VAO_, VBO_, EBO_;
     void setupMesh();
+
 private:
+        // render data
+    unsigned int VAO_, VBO_, EBO_;
     QOpenGLFunctions_4_1_Core *glFuns_;
     GLenum pel_;
     bool bInstancing_;

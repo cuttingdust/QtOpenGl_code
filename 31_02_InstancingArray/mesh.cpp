@@ -17,25 +17,6 @@ Mesh::Mesh(QOpenGLFunctions_4_1_Core *glFuns
 
 void Mesh::setupMesh()
 {
-    QVector2D translations[100];
-    int index = 0;
-    float offset = 0.1f;
-    for(int y = -10; y < 10; y += 2) {
-        for(int x = -10; x < 10; x += 2) {
-            QVector2D translation;
-            translation.setX((float)x / 10.0f + offset);
-            translation.setY((float)y / 10.0f + offset);
-            translations[index++] = translation;
-        }
-    }
-
-    unsigned int instanceVBO;
-    glFuns_->glGenBuffers(1, &instanceVBO);
-    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-    glFuns_->glBufferData(GL_ARRAY_BUFFER, sizeof(QVector2D) * 100, &translations[0], GL_STATIC_DRAW);
-    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-
     /// 创建VBO和VAO对象，并赋予ID
     glFuns_->glGenVertexArrays(1, &VAO_);
     glFuns_->glGenBuffers(1, &VBO_);
@@ -53,24 +34,16 @@ void Mesh::setupMesh()
     glFuns_->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
     glFuns_->glEnableVertexAttribArray(0);
 
-//    glFuns_->glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, texCoords_)));
-//    glFuns_->glEnableVertexAttribArray(1);
-
-    glFuns_->glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+    glFuns_->glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, texCoords_)));
     glFuns_->glEnableVertexAttribArray(1);
-
 
     glFuns_->glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, normal_)));
     glFuns_->glEnableVertexAttribArray(2);
 
-//    glFuns_->glGenBuffers(1,&EBO_);
-//    glFuns_->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_);
-//    glFuns_->glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-//                          indices_.size() * sizeof(unsigned int),&indices_[0], GL_STATIC_DRAW);
-
-    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glFuns_->glVertexAttribDivisor(2, 1);
+    glFuns_->glGenBuffers(1,&EBO_);
+    glFuns_->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_);
+    glFuns_->glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                          indices_.size() * sizeof(unsigned int),&indices_[0], GL_STATIC_DRAW);
 }
 
 
@@ -135,6 +108,39 @@ int Mesh::getInstancingNum() const {
 
 void Mesh::setInstancingNum(int instancingNum) {
     instancingNum_ = instancingNum;
+}
+
+void Mesh::openInstancing() {
+    if (bInstancing_)
+    {
+          int rowNum = sqrt(instancingNum_);
+    QVector2D translations[instancingNum_];
+    int index = 0;
+    float offset = 0.1f;
+    for(int y = -10; y < rowNum; y += 2) {
+        for(int x = -10; x < rowNum; x += 2) {
+            QVector2D translation;
+            translation.setX((float)x / rowNum + offset);
+            translation.setY((float)y / rowNum + offset);
+            translations[index++] = translation;
+        }
+    }
+
+    unsigned int instanceVBO;
+    glFuns_->glGenBuffers(1, &instanceVBO);
+    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+    glFuns_->glBufferData(GL_ARRAY_BUFFER, sizeof(QVector2D) * 100, &translations[0], GL_STATIC_DRAW);
+    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+    glFuns_->glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+    glFuns_->glEnableVertexAttribArray(3);
+
+    glFuns_->glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glFuns_->glVertexAttribDivisor(3, 1);
+
+    }
+
 }
 
 

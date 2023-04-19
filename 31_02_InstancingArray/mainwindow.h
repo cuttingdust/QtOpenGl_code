@@ -38,6 +38,7 @@ protected slots:
     void slotDrawHouse();
     void slotDrawExplode();
     void slotShowNormal();
+    void slotDrawInstancing();
 private:
     Ui::MainWindow *ui_;
 
