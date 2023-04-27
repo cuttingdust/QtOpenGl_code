@@ -32,8 +32,8 @@ QMenuBar {
    <widget class="ModelLoadingOWgt" name="openGLWidget">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>140</y>
+      <x>240</x>
+      <y>300</y>
       <width>300</width>
       <height>200</height>
      </rect>
@@ -101,6 +101,7 @@ QMenuBar {
    <addaction name="separator"/>
    <addaction name="actionDrawCube"/>
    <addaction name="actionDrawPlane"/>
+   <addaction name="actionDrawTriangle"/>
    <addaction name="actionDrawWindows"/>
    <addaction name="actionDrawVegetation"/>
    <addaction name="separator"/>
@@ -261,6 +262,11 @@ QMenuBar {
   <action name="actionDrawPlanet">
    <property name="text">
     <string>DrawPlanet</string>
+   </property>
+  </action>
+  <action name="actionDrawTriangle">
+   <property name="text">
+    <string>DrawTriangle</string>
    </property>
   </action>
  </widget>
