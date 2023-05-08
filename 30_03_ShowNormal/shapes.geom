@@ -37,10 +37,6 @@ vec4 explode(vec4 position, vec3 normal) {
 
 void main()
 {
-  gs_out.v_vertex = gs_in[0].v_vertex;
-  gs_out.v_texcoord = gs_in[0].v_texcoord;
-  gs_out.v_normal = gs_in[0].v_normal;
-
   vec3 normal = GetNormal();
   if(bExplode)
   {
@@ -50,7 +46,9 @@ void main()
   {
     gl_Position = gl_in[0].gl_Position;
   }
+  gs_out.v_vertex = gs_in[0].v_vertex;
   gs_out.v_texcoord = gs_in[0].v_texcoord;
+  gs_out.v_normal = gs_in[0].v_normal;
   EmitVertex();
 
   if(bExplode)
@@ -61,7 +59,9 @@ void main()
   {
     gl_Position = gl_in[1].gl_Position;
   }
+  gs_out.v_vertex = gs_in[1].v_vertex;
   gs_out.v_texcoord = gs_in[1].v_texcoord;
+  gs_out.v_normal = gs_in[1].v_normal;
   EmitVertex();
 
 
@@ -73,7 +73,9 @@ void main()
   {
     gl_Position = gl_in[2].gl_Position;
   }
+  gs_out.v_vertex = gs_in[2].v_vertex;
   gs_out.v_texcoord = gs_in[2].v_texcoord;
+  gs_out.v_normal = gs_in[2].v_normal;
   EmitVertex();
 
 
