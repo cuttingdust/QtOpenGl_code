@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1307</width>
+    <height>994</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>HelloOpenGL</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/image/le.ico</normaloff>:/image/le.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+	background-color:rgb(68, 68, 68);
+	color:rgb(255, 255, 255);
+	font:14pt &quot;微软雅黑&quot;;
+}
+QMenuBar {
+	background-color:rgb(200, 200, 200);
+	color:rgb(60, 60, 60);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="ModelLoadingOWgt" name="openGLWidget">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>140</y>
+      <width>300</width>
+      <height>200</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1307</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>帮忙</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>文件</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>查看</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>设置</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_4"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionLoadModel"/>
+   <addaction name="actionEnvSetting"/>
+   <addaction name="actionDepthTest"/>
+   <addaction name="actionStencil"/>
+   <addaction name="actionWireFrameView"/>
+   <addaction name="actionPoints"/>
+   <addaction name="separator"/>
+   <addaction name="actionShowLights"/>
+   <addaction name="actionactionPointLight"/>
+   <addaction name="actionactionSPointLight"/>
+   <addaction name="actionactionDirLight"/>
+   <addaction name="separator"/>
+   <addaction name="actionDrawCube"/>
+   <addaction name="actionDrawPlane"/>
+   <addaction name="actionDrawTriangle"/>
+   <addaction name="actionDrawWindows"/>
+   <addaction name="actionDrawVegetation"/>
+   <addaction name="separator"/>
+   <addaction name="actionDrawHouse"/>
+   <addaction name="actionDrawExplode"/>
+   <addaction name="actionshowNormal"/>
+   <addaction name="separator"/>
+   <addaction name="actionDrawFramBuffer"/>
+   <addaction name="actionSelectFrambufferType"/>
+   <addaction name="separator"/>
+   <addaction name="actionOpenSkyBox"/>
+   <addaction name="actionReflectIonSkyBox"/>
+   <addaction name="actionReflractionSkyBox"/>
+   <addaction name="actionReflectTexSkyBox"/>
+   <addaction name="separator"/>
+   <addaction name="actionDrawInstancing"/>
+   <addaction name="actionDrawPlanet"/>
+   <addaction name="separator"/>
+   <addaction name="actionDebug"/>
+   <addaction name="actionDepthTestShader"/>
+  </widget>
+  <action name="actionWireFrameView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>线框渲染</string>
+   </property>
+  </action>
+  <action name="actionDebug">
+   <property name="text">
+    <string>调试</string>
+   </property>
+  </action>
+  <action name="actionEnvSetting">
+   <property name="text">
+    <string>环境设置</string>
+   </property>
+  </action>
+  <action name="actionLoadModel">
+   <property name="text">
+    <string>模型加载</string>
+   </property>
+  </action>
+  <action name="actionShowLights">
+   <property name="text">
+    <string>显示灯光组</string>
+   </property>
+  </action>
+  <action name="actionDrawCube">
+   <property name="text">
+    <string>DrawCube</string>
+   </property>
+  </action>
+  <action name="actionDrawPlane">
+   <property name="text">
+    <string>DrawPlane</string>
+   </property>
+  </action>
+  <action name="actionDepthTest">
+   <property name="text">
+    <string>深度测试</string>
+   </property>
+  </action>
+  <action name="actionDepthTestShader">
+   <property name="text">
+    <string>ZBuffertShader</string>
+   </property>
+  </action>
+  <action name="actionStencil">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>模版测试</string>
+   </property>
+  </action>
+  <action name="actionDrawVegetation">
+   <property name="text">
+    <string>DrawVegetation</string>
+   </property>
+  </action>
+  <action name="actionDrawWindows">
+   <property name="text">
+    <string>DrawWindows</string>
+   </property>
+  </action>
+  <action name="actionDrawFramBuffer">
+   <property name="text">
+    <string>DrawFramBuffer</string>
+   </property>
+  </action>
+  <action name="actionSelectFrambufferType">
+   <property name="text">
+    <string>SelectFrambufferType</string>
+   </property>
+  </action>
+  <action name="actionOpenSkyBox">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>OpenSkyBox</string>
+   </property>
+  </action>
+  <action name="actionReflectIonSkyBox">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>ReflectIonSkyBox</string>
+   </property>
+  </action>
+  <action name="actionReflractionSkyBox">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>ReflractionSkyBox</string>
+   </property>
+  </action>
+  <action name="actionReflectTexSkyBox">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>ReflectTexSkyBox</string>
+   </property>
+  </action>
+  <action name="actionPoints">
+   <property name="text">
+    <string>点云渲染</string>
+   </property>
+  </action>
+  <action name="actionDrawHouse">
+   <property name="text">
+    <string>DrawHouse</string>
+   </property>
+  </action>
+  <action name="actionDrawExplode">
+   <property name="text">
+    <string>DrawExplode</string>
+   </property>
+  </action>
+  <action name="actionshowNormal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>showNormal</string>
+   </property>
+  </action>
+  <action name="actionDrawInstancing">
+   <property name="text">
+    <string>DrawInstancing</string>
+   </property>
+  </action>
+  <action name="actionDrawPlanet">
+   <property name="text">
+    <string>DrawPlanet</string>
+   </property>
+  </action>
+  <action name="actionDrawTriangle">
+   <property name="text">
+    <string>DrawTriangle</string>
+   </property>
+  </action>
+  <action name="actionactionPointLight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>actionPointLight</string>
+   </property>
+  </action>
+  <action name="actionactionSPointLight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>actionSPointLight</string>
+   </property>
+  </action>
+  <action name="actionactionDirLight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>actionDirLight</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ModelLoadingOWgt</class>
+   <extends>QOpenGLWidget</extends>
+   <header location="global">modelloadingowgt.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
