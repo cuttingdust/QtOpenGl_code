@@ -47,8 +47,11 @@ Mesh* CubeModel::processMesh(aiMesh *mesh, const aiScene *scene)
         indices.push_back(i);
     }
 
-    auto diffuseTexture = new QOpenGLTexture(QImage(":/image/texMap/container2.png").mirrored());
-    auto specularTexture = new QOpenGLTexture(QImage(":/image/texMap/lighting_maps_specular_color.png").mirrored());
+//    auto diffuseTexture = new QOpenGLTexture(QImage(":/image/texMap/container2.png").mirrored());
+//    auto specularTexture = new QOpenGLTexture(QImage(":/image/texMap/lighting_maps_specular_color.png").mirrored());
+
+    auto diffuseTexture = new QOpenGLTexture(QImage(":/image/images/wood.png").mirrored());
+    auto specularTexture = new QOpenGLTexture(QImage(":/image/images/wood.png").mirrored());
 
     Texture tex;
     tex.id_= diffuseTexture->textureId();
@@ -90,8 +93,8 @@ void CubeModel::Draw(QOpenGLShaderProgram &shader) {
 
     model.setToIdentity();
     model.translate(QVector3D(-1.0f, 0.0f, 2.0));
-    model.scale(0.25);
     model.rotate(60,QVector3D(1.0, 0.0, 1.0));
+    model.scale(0.25);
     shader.setUniformValue("model", model);
     cubeMesh_->Draw(shader);
 }

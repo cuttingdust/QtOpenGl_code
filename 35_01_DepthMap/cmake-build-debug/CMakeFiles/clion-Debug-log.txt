@@ -1,0 +1,8 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap -B /Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/cmake-build-debug
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+QTFILE=/Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/ModelLoading.qrc/Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/depthtestdialog.ui/Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/environmentsettingdialog.ui/Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/frambuffersettingdialog.ui/Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/mainwindow.ui/Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/shownormaldg.ui
+QT_VERSION_MAJOR= 6
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/handabao/MyFile/code/QtOpengl/35_01_DepthMap/cmake-build-debug

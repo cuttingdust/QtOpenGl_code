@@ -50,21 +50,21 @@ Mesh* PlaneModel::processMesh(aiMesh *mesh, const aiScene *scene)
 
 //    auto diffuseTexture = new QOpenGLTexture(QImage(":/image/texMap/container2.png").mirrored());
 //    auto diffuseTexture = new QOpenGLTexture(QImage(":/image/images/wall.jpg").mirrored());
-    QImage wall = QImage(":/image/images/wall.jpg").convertToFormat(QImage::Format_RGB888);
+    QImage wall = QImage(":/image/images/wood.png").convertToFormat(QImage::Format_RGB888);
     auto diffuseTexture = new QOpenGLTexture(QOpenGLTexture::Target2D);
     glFuns_->glBindTexture(GL_TEXTURE_2D, diffuseTexture->textureId());
     glFuns_->glTexImage2D(GL_TEXTURE_2D,0, GL_SRGB, wall.width(), wall.height(),0, GL_RGB, GL_UNSIGNED_BYTE, wall.bits());
     glFuns_->glGenerateMipmap(GL_TEXTURE_2D);
 
 
-    auto specularTexture = new QOpenGLTexture(QImage(":/image/images/wall.jpg").mirrored());
+    auto specularTexture = new QOpenGLTexture(QImage(":/image/images/wood.png").mirrored());
     Texture tex;
     tex.id_= diffuseTexture->textureId();
     tex.type_ = "texture_diffuse";
     textures.push_back(tex);
     tex.id_ = specularTexture->textureId();
     tex.type_ = "texture_specular";
-    textures.push_back(tex);
+//    textures.push_back(tex);
 
     return new Mesh(glFuns_ ,vertices, indices, textures);
 }

@@ -1,13 +1,3 @@
-/// shapes.vert
-//#version 120
-
-//attribute vec3 a_vertex;
-//attribute vec2 a_texcoord;
-//attribute vec3 a_normal;
-//
-//varying vec3 v_vertex;
-//varying vec2 v_texcoord;
-//varying vec3 v_normal;
 
 #version 410 core
 

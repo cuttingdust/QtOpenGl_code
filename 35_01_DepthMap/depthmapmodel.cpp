@@ -4,6 +4,8 @@
 const static unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 static unsigned int depthMapFBO;
 
+const static float near_plane = 1.0f, far_plane = 7.5f;
+
 void DepthMapModel::processNode(aiNode *node, const aiScene *scene)
 {
     quadMesh_ = processMesh(nullptr, nullptr);
@@ -11,7 +13,7 @@ void DepthMapModel::processNode(aiNode *node, const aiScene *scene)
 
 Mesh* DepthMapModel::processMesh(aiMesh *mesh, const aiScene *scene)
 {
-    std::vector<Vertex> vertices(36);
+    std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
 
@@ -89,7 +91,7 @@ Mesh* DepthMapModel::processMesh(aiMesh *mesh, const aiScene *scene)
     textures.push_back(frambufferTex);
     frambufferTex.id_ = depthMap;
     frambufferTex.type_ = "texture_specular";
-    textures.push_back(frambufferTex);
+//    textures.push_back(frambufferTex);
 
     return new Mesh(glFuns_ ,vertices, indices, textures);
 }
@@ -110,6 +112,8 @@ DepthMapModel::DepthMapModel(QOpenGLFunctions_4_1_Core *glfuns, int width, int h
 void DepthMapModel::Draw(QOpenGLShaderProgram &shader) {
     QMatrix4x4 model;
     shader.bind();
+    shader.setUniformValue("near_plane", near_plane);
+    shader.setUniformValue("far_plane", far_plane);
     // reset viewport
     glFuns_->glViewport(0, 0, width_ , height_);
    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -129,7 +133,7 @@ void DepthMapModel::bindFramer(QOpenGLShaderProgram &shader, QVector3D lightPos)
     /// --------------------------------------------------------------
     QMatrix4x4 lightProjection, lightView;
     QMatrix4x4 lightSpaceMatrix;
-    float near_plane = 1.0f, far_plane = 7.5f;
+
     lightProjection.ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
     lightView.lookAt(lightPos, QVector3D(0.0,0.0,0.0), QVector3D(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;

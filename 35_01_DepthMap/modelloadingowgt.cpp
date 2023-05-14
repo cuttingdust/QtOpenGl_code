@@ -14,8 +14,11 @@ QMatrix4x4 view;
 QMatrix4x4 projection;
 QPoint lastPos;
 
-QVector3D gLightPos(1.2f, 1.0f, 2.0f);
-QVector3D gViewInitPos(0.0, 5.0, 20.0);
+//QVector3D gLightPos(1.2f, 1.0f, 2.0f);
+QVector3D gLightPos(-2.0f, 4.0f, -1.0f);
+
+//QVector3D gViewInitPos(0.0, 5.0, 20.0);
+QVector3D gViewInitPos(0.0f, 0.0f, 3.0f);
 
 QVector3D gLightColor(1.0f, 1.0f, 1.0f);
 QVector3D gObjectColor(1.0f, 0.5f, 0.31f);
@@ -153,6 +156,10 @@ void ModelLoadingOWgt::paintGL() {
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(testFunc_);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_MULTISAMPLE);
+
     glEnable(GL_STENCIL_TEST);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -206,6 +213,12 @@ void ModelLoadingOWgt::drawObject() {
             }
         }
 
+        if (bDrawDepthMap_)
+        {
+            glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
+            depthMapShaderProgram_.release();
+            aDepthMap_->Draw(quadShaderProgram_);
+        }
 
 
         if (aTriangle_ && bDrawTriangle_) {
@@ -316,12 +329,7 @@ void ModelLoadingOWgt::drawObject() {
         aInstance_->Draw(instancingShaderProgram_);
     }
 
-    if (bDrawDepthMap_)
-    {
-        glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
-        depthMapShaderProgram_.release();
-        aDepthMap_->Draw(quadShaderProgram_);
-    }
+
 
 
 }
