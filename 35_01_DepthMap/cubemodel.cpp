@@ -81,7 +81,6 @@ void CubeModel::Draw(QOpenGLShaderProgram &shader) {
     model.setToIdentity();
     model.translate(QVector3D(0.0f, 1.5f, 0.0));
     model.scale(0.5);
-    shader.setUniformValue("model", model);
     shader.setUniformValue("skybox", 15);
     cubeMesh_->Draw(shader);
 
@@ -93,8 +92,8 @@ void CubeModel::Draw(QOpenGLShaderProgram &shader) {
 
     model.setToIdentity();
     model.translate(QVector3D(-1.0f, 0.0f, 2.0));
-    model.rotate(60,QVector3D(1.0, 0.0, 1.0));
     model.scale(0.25);
+    model.rotate(60,QVector3D(1.0, 0.0, 1.0));
     shader.setUniformValue("model", model);
     cubeMesh_->Draw(shader);
 }

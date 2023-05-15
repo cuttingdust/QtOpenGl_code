@@ -112,8 +112,6 @@ DepthMapModel::DepthMapModel(QOpenGLFunctions_4_1_Core *glfuns, int width, int h
 void DepthMapModel::Draw(QOpenGLShaderProgram &shader) {
     QMatrix4x4 model;
     shader.bind();
-    shader.setUniformValue("near_plane", near_plane);
-    shader.setUniformValue("far_plane", far_plane);
     // reset viewport
     glFuns_->glViewport(0, 0, width_ , height_);
    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -137,9 +135,10 @@ void DepthMapModel::bindFramer(QOpenGLShaderProgram &shader, QVector3D lightPos)
     lightProjection.ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
     lightView.lookAt(lightPos, QVector3D(0.0,0.0,0.0), QVector3D(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;
-    shader.setUniformValue("lightSpaceMatrix", lightSpaceMatrix);
+
 
     glFuns_->glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
     glFuns_->glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
     glFuns_->glClear(GL_DEPTH_BUFFER_BIT);
+    shader.setUniformValue("lightSpaceMatrix", lightSpaceMatrix);
 }

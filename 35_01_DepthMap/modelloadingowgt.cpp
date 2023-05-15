@@ -18,7 +18,7 @@ QPoint lastPos;
 QVector3D gLightPos(-2.0f, 4.0f, -1.0f);
 
 //QVector3D gViewInitPos(0.0, 5.0, 20.0);
-QVector3D gViewInitPos(0.0f, 0.0f, 3.0f);
+QVector3D gViewInitPos(0.0f, 4.0f, 5.0f);
 
 QVector3D gLightColor(1.0f, 1.0f, 1.0f);
 QVector3D gObjectColor(1.0f, 0.5f, 0.31f);
@@ -191,34 +191,34 @@ void ModelLoadingOWgt::drawObject() {
     }
 
     drawShaderProgram();
-    if (bDrawDepthMap_)
-    {
+//    if (bDrawDepthMap_)
+//    {
         aDepthMap_->bindFramer(depthMapShaderProgram_, gLightPos);
-    }
+//    }
 
     {
-        if (aPlane_ && bDrawPlane_) {
-            if (bDrawDepthMap_) {
+//        if (aPlane_ && bDrawPlane_) {
+//            if (bDrawDepthMap_) {
                 aPlane_->Draw(depthMapShaderProgram_);
-            } else {
-                aPlane_->Draw(shaderProgram_);
-            }
-        }
+//            } else {
+//                aPlane_->Draw(shaderProgram_);
+//            }
+//        }
 
-        if (aCube_ && bDrawCube_) {
-            if (bDrawDepthMap_) {
+//        if (aCube_ && bDrawCube_) {
+//            if (bDrawDepthMap_) {
                 aCube_->Draw(depthMapShaderProgram_);
-            } else {
-                aCube_->Draw(shaderProgram_);
-            }
-        }
+//            } else {
+//                aCube_->Draw(shaderProgram_);
+//            }
+//        }
 
-        if (bDrawDepthMap_)
-        {
+//        if (bDrawDepthMap_)
+//        {
             glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
             depthMapShaderProgram_.release();
             aDepthMap_->Draw(quadShaderProgram_);
-        }
+//        }
 
 
         if (aTriangle_ && bDrawTriangle_) {
