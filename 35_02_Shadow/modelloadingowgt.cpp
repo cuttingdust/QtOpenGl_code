@@ -17,8 +17,8 @@ QPoint lastPos;
 //QVector3D gLightPos(1.2f, 1.0f, 2.0f);
 QVector3D gLightPos(-2.0f, 4.0f, -1.0f);
 
-//QVector3D gViewInitPos(0.0, 5.0, 20.0);
-QVector3D gViewInitPos(0.0f, 4.0f, 5.0f);
+QVector3D gViewInitPos(0.0, 5.0, 20.0);
+//QVector3D gViewInitPos(0.0f, 4.0f, 5.0f);
 //QVector3D gViewInitPos(-1.0f,8.0f,8.0f);
 
 QVector3D gLightColor(1.0f, 1.0f, 1.0f);

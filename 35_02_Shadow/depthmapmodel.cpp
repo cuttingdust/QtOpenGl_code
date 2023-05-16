@@ -126,9 +126,9 @@ void DepthMapModel::Draw(QOpenGLShaderProgram &shader) {
 
     shader.bind();
     shader.setUniformValue("lightSpaceMatrix", lightSpaceMatrix);
-    glViewport(0, 0, width_, height_);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, depthMap);
+    glFuns_->glViewport(0, 0, width_, height_);
+    glFuns_->glActiveTexture(GL_TEXTURE1);
+    glFuns_->glBindTexture(GL_TEXTURE_2D, depthMap);
     shader.setUniformValue("depthMap",1);
 
 }
