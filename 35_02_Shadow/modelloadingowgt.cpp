@@ -18,8 +18,8 @@ QPoint lastPos;
 QVector3D gLightPos(-2.0f, 4.0f, -1.0f);
 
 //QVector3D gViewInitPos(0.0, 5.0, 20.0);
-//QVector3D gViewInitPos(0.0f, 4.0f, 5.0f);
-QVector3D gViewInitPos(-1.0f,8.0f,8.0f);
+QVector3D gViewInitPos(0.0f, 4.0f, 5.0f);
+//QVector3D gViewInitPos(-1.0f,8.0f,8.0f);
 
 QVector3D gLightColor(1.0f, 1.0f, 1.0f);
 QVector3D gObjectColor(1.0f, 0.5f, 0.31f);
@@ -221,11 +221,10 @@ void ModelLoadingOWgt::drawObject() {
 //        {
             glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
             depthMapShaderProgram_.release();
-//            aDepthMap_->Draw(quadShaderProgram_);
             aDepthMap_->Draw(shadowShaderProgram_);
             aPlane_->Draw(shadowShaderProgram_);
             aCube_->Draw(shadowShaderProgram_);
-            shadowShaderProgram_.release();
+//            shadowShaderProgram_.release();
 //        }
 
 
@@ -1140,7 +1139,7 @@ void ModelLoadingOWgt::bindUBOBuffer() {
     int uniformBlockIndexShadowShader =
             glGetUniformBlockIndex(shadowShaderProgram_.programId(),"Matrices");
     glUniformBlockBinding(shadowShaderProgram_.programId(),
-                          uniformBlockIndexShadowShader , 0);
+                          uniformBlockIndexShadowShader, 0);
 }
 
 void ModelLoadingOWgt::enableGLFun() {
@@ -1279,15 +1278,15 @@ void ModelLoadingOWgt::drawShadowShaderProgram() {
     model.setToIdentity();
     shadowShaderProgram_.setUniformValue("viewPos",camera_.getPosition());
 
-    /// light properties, note that all light colors are set at full intensity
+    // light properties, note that all light colors are set at full intensity
     shadowShaderProgram_.setUniformValue("light.ambient", 0.3f, 0.2f, 0.2f);
     shadowShaderProgram_.setUniformValue("light.diffuse", 0.9f, 0.9f, 0.9f);
     shadowShaderProgram_.setUniformValue("light.specular", 1.0f, 1.0f, 1.0f);
-
-    /// material properties
+    // material properties
     shadowShaderProgram_.setUniformValue("material.shininess", 32.0f);
     shadowShaderProgram_.setUniformValue("light.pos", gLightPos);
     shadowShaderProgram_.setUniformValue("model", model);
+
 }
 
 

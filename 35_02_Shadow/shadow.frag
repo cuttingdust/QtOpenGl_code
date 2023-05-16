@@ -1,4 +1,4 @@
-#version 410 core
+#version 330 core
 
 struct Material {
     sampler2D texture_diffuse1;
@@ -14,6 +14,8 @@ struct Light {
     vec3 specular;
 };
 uniform Light light;
+
+
 out vec4 FragColor;
 
 in vec2 TexCoords;

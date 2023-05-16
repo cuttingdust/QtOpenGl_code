@@ -3,10 +3,10 @@
 
 const static unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 static unsigned int depthMapFBO;
-static unsigned int depthMap;
 
 const static float near_plane = 1.0f, far_plane = 7.5f;
 static QMatrix4x4 lightSpaceMatrix;
+static unsigned int depthMap;
 
 void DepthMapModel::processNode(aiNode *node, const aiScene *scene)
 {
@@ -97,8 +97,8 @@ Mesh* DepthMapModel::processMesh(aiMesh *mesh, const aiScene *scene)
 //    return new Mesh(glFuns_ ,vertices, indices, textures);
 
     return nullptr;
-}
 
+}
 
 
 DepthMapModel::DepthMapModel(QOpenGLFunctions_4_1_Core *glfuns, int width, int height):
@@ -123,7 +123,6 @@ void DepthMapModel::Draw(QOpenGLShaderProgram &shader) {
 //    // ---------------------------------------------
 //    quadMesh_->Draw(shader);
 //    shader.release();
-
 
     shader.bind();
     shader.setUniformValue("lightSpaceMatrix", lightSpaceMatrix);
