@@ -198,39 +198,39 @@ void ModelLoadingOWgt::drawObject() {
 
     drawShaderProgram();
     drawShadowShaderProgram();
-//    if (bDrawDepthMap_)
-//    {
+    if (bDrawDepthMap_)
+    {
         aDepthMap_->bindFramer(depthMapShaderProgram_, gLightPos);
-//    }
+    }
 
     {
-//        if (aPlane_ && bDrawPlane_) {
-//            if (bDrawDepthMap_) {
-//                aPlane_->Draw(depthMapShaderProgram_);
-//            } else {
-//                aPlane_->Draw(shaderProgram_);
-//            }
-//        }
+        if (aPlane_ && bDrawPlane_) {
+            if (bDrawDepthMap_) {
+                aPlane_->Draw(depthMapShaderProgram_);
+            } else {
+                aPlane_->Draw(shaderProgram_);
+            }
+        }
 
-//        if (aCube_ && bDrawCube_) {
-//            if (bDrawDepthMap_) {
+        if (aCube_ && bDrawCube_) {
+            if (bDrawDepthMap_) {
                 aCube_->Draw(depthMapShaderProgram_);
-//            } else {
-//                aCube_->Draw(shaderProgram_);
-//            }
-//        }
+            } else {
+                aCube_->Draw(shaderProgram_);
+            }
+        }
 
-//        if (bDrawDepthMap_)
-//        {
+        if (bDrawDepthMap_)
+        {
             /// 不要忘记设回原先的culling face
 //            glCullFace(GL_BACK);
             glBindFramebuffer(GL_FRAMEBUFFER, QOpenGLContext::currentContext()->defaultFramebufferObject());
             depthMapShaderProgram_.release();
             aDepthMap_->Draw(shadowShaderProgram_);
-//            aPlane_->Draw(shadowShaderProgram_);
+            aPlane_->Draw(shadowShaderProgram_);
             aCube_->Draw(shadowShaderProgram_);
-//            shadowShaderProgram_.release();
-//        }
+            shadowShaderProgram_.release();
+        }
 
 
         if (aTriangle_ && bDrawTriangle_) {
