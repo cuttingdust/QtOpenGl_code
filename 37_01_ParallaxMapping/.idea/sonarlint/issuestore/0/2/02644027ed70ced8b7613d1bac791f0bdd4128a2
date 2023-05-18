@@ -1,0 +1,14 @@
+
+m	cpp:S35396"SRemove this redundant access specifier; it does not change the accessibility level.(îĞÎúüÿÿÿÿ
+m	cpp:S3539>"SRemove this redundant access specifier; it does not change the accessibility level.(îĞÎúüÿÿÿÿ
+n	cpp:S3539²"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+n	cpp:S3539Î"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+n	cpp:S3539Ò"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+n	cpp:S3539ñ"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+n	cpp:S3539ù"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+n	cpp:S3539ı"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+n	cpp:S3539"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+n	cpp:S3539Š"SRemove this redundant access specifier; it does not change the accessibility level.(ĞòÚÚüÿÿÿÿ
+x	cpp:S1820%"^Refactor this structure so it has no more than 20 fields, rather than the 69 it currently has.(®‹®ğùÿÿÿÿ
+w	cpp:S1448%"]Class has 94 methods, which is greater than the 35 authorized. Split it into smaller classes.(®‹®ğùÿÿÿÿ
+L	cpp:S3471*"2Annotate this function with "override" or "final".(Üöß¼ıÿÿÿÿ

@@ -1,0 +1,17 @@
+
+=	cpp:S5421"!Global variables should be const.(’“ÿü8•Ÿƒş‚1
+=	cpp:S5421"!Global variables should be const.(Ë×Â³8•Ÿƒş‚1
+r	cpp:S50255"QReplace the use of "new" with an operation that automatically manages the memory.(Â”õËûÿÿÿÿ8–Ÿƒş‚1
+m	cpp:S50256"QReplace the use of "new" with an operation that automatically manages the memory.(ìƒÄÅ8–Ÿƒş‚1
+m	cpp:S50257"QReplace the use of "new" with an operation that automatically manages the memory.(š½ò£8–Ÿƒş‚1
+Q	cpp:S1659Y"0Define each identifier in a dedicated statement.(õè˜üÿÿÿÿ8šŸƒş‚1
+Q	cpp:S1659Z"0Define each identifier in a dedicated statement.(»‚˜£ùÿÿÿÿ8šŸƒş‚1
+Y	cpp:S5945"=Use "std::array" or "std::vector" instead of a C-style array.(ëÕ€8¤Ÿƒş‚1
+6	cpp:S4962"Use the "nullptr" literal.(Ÿø?8°Ÿƒş‚1
+t	cpp:S1699¦"WRemove this call from a constructor/destructor to the overridable "processNode" method.(Ä°—©8±Ÿƒş‚1
+x	cpp:S3490¼"VUse "=default" instead of the default implementation of this special member functions.(ÙÂ·çüÿÿÿÿ8³Ÿƒş‚1
+9cpp:S125"Remove the commented out code.(¸çö½8úŸƒş‚1
+>cpp:S125"Remove the commented out code.(óÅ¢™ûÿÿÿÿ8úŸƒş‚1
+9cpp:S1259"Remove the commented out code.(ğëı·8úŸƒş‚1
+:cpp:S125¸"Remove the commented out code.(ĞêÄô8úŸƒş‚1
+:cpp:S125½"Remove the commented out code.(÷šæğ8úŸƒş‚1
