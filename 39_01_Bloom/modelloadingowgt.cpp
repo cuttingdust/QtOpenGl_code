@@ -149,6 +149,7 @@ void ModelLoadingOWgt::resizeGL(int w, int h) {
     Q_UNUSED(w);
     Q_UNUSED(h);
     // glViewport(0, 0, w, h);
+
     aBloomCube_->resizeGL(w, h);
 }
 
@@ -161,12 +162,16 @@ void ModelLoadingOWgt::paintGL() {
     {
         aGlass_->bindFramer();
     }
+
     if (aHDRCube_->isBhdr())
     {
-         aHDRCube_->bindFrambuffer();
+        aHDRCube_->bindFrambuffer();
     }
-    aBloomCube_->bindFrambuffer();
 
+    if (bDrawBloom_)
+    {
+        aBloomCube_->bindFrambuffer();
+    }
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(testFunc_);
@@ -179,8 +184,6 @@ void ModelLoadingOWgt::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glStencilMask(0x00);
     glDisable(GL_CULL_FACE);
-
-
 
     view = camera_.getViewMatrix();
     projection.perspective(camera_.getZoom(), (float) width() / height(), gNear, gFar);
@@ -210,20 +213,26 @@ void ModelLoadingOWgt::drawObject() {
     drawShaderProgram();
     drawNormalMapShaderProgram();
     drawShadowShaderProgram();
-    drawHDRLightShaderProgram();
-    drawBloomLightShaderProgram();
 
-    aBloomCube_->Draw(bloomLightingShaderProgram_);
-    aBloomCube_->DrawLight(bloomLightShaderProgram_);
-    aBloomCube_->DrawBlur(blurShaderProgram_);
-    aBloomCube_->DrawBloom(bloomShaderProgram_);
-
-    if( aHDRCube_->isBhdr() )
+    if (aHDRCube_->isBhdr())
     {
+        drawHDRLightShaderProgram();
         aHDRCube_->Draw(hdrLightingShaderProgram_);
         aHDRCube_->realeaseFrambuffer();
         aHDRCube_->renderQuad(hdrCubeShaderProgram_);
     }
+
+    if (bDrawBloom_)
+    {
+        drawBloomLightShaderProgram();
+        aBloomCube_->Draw(bloomLightingShaderProgram_);
+        aBloomCube_->DrawLight(bloomLightShaderProgram_);
+        aBloomCube_->realeaseFrambuffer();
+        aBloomCube_->DrawBlur(bloomBlurShaderProgram_);
+        aBloomCube_->DrawBloom(bloomShaderProgram_);
+    }
+
+
 
     if (bDrawDepthMap_)
     {
@@ -1138,9 +1147,7 @@ void ModelLoadingOWgt::createShaderProgram() {
     if (!bSucess) {
         qWarning() << __FUNCTION__ << " " << hdrCubeShaderProgram_.log();
     }
-
-
-    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////
     bloomLightingShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/bloom/bloomlighting.vert");
     bloomLightingShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/bloom/bloomlighting.frag");
     bSucess = bloomLightingShaderProgram_.link();
@@ -1155,11 +1162,11 @@ void ModelLoadingOWgt::createShaderProgram() {
         qWarning() << __FUNCTION__ << " " << bloomLightShaderProgram_.log();
     }
 
-    blurShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/bloom/bloomblur.vert");
-    blurShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/bloom/bloomblur.frag");
-    bSucess = blurShaderProgram_.link();
+    bloomBlurShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/bloom/bloomblur.vert");
+    bloomBlurShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/bloom/bloomblur.frag");
+    bSucess = bloomBlurShaderProgram_.link();
     if (!bSucess) {
-        qWarning() << __FUNCTION__ << " " << blurShaderProgram_.log();
+        qWarning() << __FUNCTION__ << " " << bloomBlurShaderProgram_.log();
     }
 
     bloomShaderProgram_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/bloom/bloom.vert");
@@ -1245,6 +1252,7 @@ void ModelLoadingOWgt::bindUBOBuffer() {
             glGetUniformBlockIndex(bloomLightShaderProgram_.programId(),"Matrices");
     glUniformBlockBinding(bloomLightShaderProgram_.programId(),
                           uniformBlockIndexBloomLightShader, 0);
+
 }
 
 void ModelLoadingOWgt::enableGLFun() {
@@ -1273,7 +1281,7 @@ void ModelLoadingOWgt::createModel(QOpenGLFunctions_4_1_Core *funcs) {
     aNormalMapPlane_ = new NormalMapPlaneModel(funcs);
 
     aHDRCube_ = new HDRCubeModel(funcs, width(), height());
-    aBloomCube_ = new BloomCubeModel(funcs, width(),height());
+    aBloomCube_ = new BloomCubeModel(funcs, width(), height());
 
     aDepthMap_ = new DepthMapModel(funcs, this->width(), this->height());
 
@@ -1443,6 +1451,24 @@ void ModelLoadingOWgt::slotchangExpose(double vaule) {
 void ModelLoadingOWgt::drawBloomLightShaderProgram() {
     bloomLightingShaderProgram_.bind();
     bloomLightingShaderProgram_.setUniformValue("viewPos",camera_.getPosition());
+
+}
+
+void ModelLoadingOWgt::slotBloom() {
+    QCheckBox *button = qobject_cast<QCheckBox *>(sender());
+    aBloomCube_->setBBloom(button->isChecked());
+}
+
+void ModelLoadingOWgt::slotchangBloomExpose(double vaule) {
+    aBloomCube_->setExposure(vaule);
+}
+
+bool ModelLoadingOWgt::isBDrawBloom() const {
+    return bDrawBloom_;
+}
+
+void ModelLoadingOWgt::setBDrawBloom(bool bDrawBloom) {
+    bDrawBloom_ = bDrawBloom;
 }
 
 

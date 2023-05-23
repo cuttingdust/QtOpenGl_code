@@ -15,21 +15,18 @@ public:
     void Draw(QOpenGLShaderProgram &shader) override;
     void DrawLight(QOpenGLShaderProgram &shader);
     void DrawBlur(QOpenGLShaderProgram &shader);
-    void DrawBloom(QOpenGLShaderProgram &shader);
+    void DrawBloom(QOpenGLShaderProgram &shader);    void resizeGL(int w, int h);
     void renderQuad();
     void bindFrambuffer();
     void realeaseFrambuffer();
-    void resizeGL(int w, int h);
+
+    bool isBBloom() const;
+    void setBBloom(bool bBloom);
+    float getExposure() const;
+    void setExposure(float exposure);
 private:
     void processNode(aiNode *node, const aiScene *scene) override;
     Mesh* processMesh(aiMesh *mesh, const aiScene *scene) override;
-
-public:
-    bool isBBloom() const;
-    void setBBloom(bool bBloom);
-    int getExposure() const;
-    void setExposure(int exposure);
-
 
 private:
     // model data
@@ -38,9 +35,9 @@ private:
     int width_ = 0;
     int height_ = 0;
 
-    float exposure_ = 5.1f;
-    bool bBloom_ = true;
 
+    bool bBloom_ = false;
+    float exposure_ = 1.0f;
 
 };
 

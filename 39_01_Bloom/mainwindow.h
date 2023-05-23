@@ -47,6 +47,7 @@ protected slots:
     void slotTestGamma();
     void slotDepthMap();
     void slotNormalMap();
+    void slotDrawBloom();
 
 private:
     Ui::MainWindow *ui_;

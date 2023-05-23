@@ -45,8 +45,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui_->actionNormalMap, SIGNAL(triggered()), this, SLOT(slotNormalMap()));
 
 
-    connect(ui_->checkBox, SIGNAL(stateChanged(int)), ui_->openGLWidget, SLOT(slotHDR()));
-    connect(ui_->doubleSpinBox, SIGNAL(valueChanged(double )), ui_->openGLWidget, SLOT(slotchangExpose(double )));
+    connect(ui_->checkBox_3, SIGNAL(stateChanged(int)), ui_->openGLWidget, SLOT(slotBloom()));
+    connect(ui_->doubleSpinBox_3, SIGNAL(valueChanged(double )), ui_->openGLWidget, SLOT(slotchangBloomExpose(double )));
+    connect(ui_->actionDrawBloom, SIGNAL(triggered()), this, SLOT(slotDrawBloom()));
+
 }
 
 void MainWindow::slotWireframeView()
@@ -223,4 +225,9 @@ void MainWindow::slotNormalMap() {
     auto bNormalMap = ui_->openGLWidget->isBDrawNormalMapTest();
     ui_->openGLWidget->setBDrawNormalMapTest(!bNormalMap);
 
+}
+
+void MainWindow::slotDrawBloom() {
+    auto bDrawBloom = ui_->openGLWidget->isBDrawBloom();
+    ui_->openGLWidget->setBDrawBloom(!bDrawBloom);
 }

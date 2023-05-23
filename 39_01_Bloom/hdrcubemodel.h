@@ -35,7 +35,7 @@ private:
 
 
     bool bHDR = false;
-    float exposure = 10.1f;
+    float exposure = 20.1f;
 };
 
 #endif

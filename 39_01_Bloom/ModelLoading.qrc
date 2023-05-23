@@ -99,13 +99,13 @@
         <file>hdrlighting.vert</file>
     </qresource>
     <qresource prefix="/bloom">
-        <file>bloom.frag</file>
-        <file>bloom.vert</file>
-        <file>bloomblur.frag</file>
-        <file>bloomblur.vert</file>
-        <file>bloomlight.frag</file>
-        <file>bloomlight.vert</file>
         <file>bloomlighting.frag</file>
         <file>bloomlighting.vert</file>
+        <file>bloomlight.frag</file>
+        <file>bloomlight.vert</file>
+        <file>bloomblur.frag</file>
+        <file>bloomblur.vert</file>
+        <file>bloom.frag</file>
+        <file>bloom.vert</file>
     </qresource>
 </RCC>

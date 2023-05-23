@@ -1,4 +1,3 @@
-
 #ifndef __MODELLOADINGOWGT_H__
 #define __MODELLOADINGOWGT_H__
 
@@ -135,6 +134,9 @@ public:
     bool isBDrawNormalMapTest() const;
     void setBDrawNormalMapTest(bool bDrawNormalMapTest);
 
+    bool isBDrawBloom() const;
+    void setBDrawBloom(bool bDrawBloom);
+
     void setPointLight(bool bPointLight);
     void setSSPointLight(bool bSSPointLightEnabled);
     void setDirectionalLight(bool bDirection);
@@ -154,6 +156,10 @@ protected slots:
     void slotShowNormalLength(int vau);
     void slotHDR();
     void slotchangExpose(double vaule);
+    void slotBloom();
+    void slotchangBloomExpose(double vaule);
+
+
 signals:
     void signalMousePickingPos(QVector3D worldPos);
 
@@ -176,8 +182,8 @@ private:
     void drawrReflectionShaderProgram(Model* model);
     void drawrRefractionShaderProgram(Model* model);
     void drawShadowShaderProgram();
-    void drawNormalMapShaderProgram();
     void drawHDRLightShaderProgram();
+    void drawNormalMapShaderProgram();
     void drawBloomLightShaderProgram();
 
     QVector4D worldPosFromViewPort(int posX,int posY);
@@ -201,11 +207,9 @@ private:
     QOpenGLShaderProgram normalMapShaderProgram_;
     QOpenGLShaderProgram hdrLightingShaderProgram_;
     QOpenGLShaderProgram hdrCubeShaderProgram_;
-
-    ////////////////////////////////////////////////////////////////
     QOpenGLShaderProgram bloomLightingShaderProgram_;
     QOpenGLShaderProgram bloomLightShaderProgram_;
-    QOpenGLShaderProgram blurShaderProgram_;
+    QOpenGLShaderProgram bloomBlurShaderProgram_;
     QOpenGLShaderProgram bloomShaderProgram_;
 
     QTimer updateTimer_;
@@ -241,7 +245,7 @@ private:
     DepthMapModel* aDepthMap_;
     NormalMapPlaneModel* aNormalMapPlane_;
     HDRCubeModel* aHDRCube_;
-    BloomCubeModel* aBloomCube_;
+    BloomCubeModel * aBloomCube_;
 
     bool bShowLights_;
     bool bDrawCube_;
@@ -280,6 +284,8 @@ private:
 
     bool bTestGamma_;
     bool bGamma_;
+    bool bDrawBloom_;
+
 
 private:
     ShowNormalDg* pShownormalDG_ = nullptr;

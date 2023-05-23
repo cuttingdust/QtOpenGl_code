@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1647</width>
-    <height>1148</height>
+    <height>1189</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,18 +125,13 @@ QMenuBar {
    <addaction name="actionDebug"/>
    <addaction name="actionDepthTestShader"/>
    <addaction name="actionTestGamma"/>
+   <addaction name="actionDrawBloom"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget">
    <property name="minimumSize">
     <size>
      <width>300</width>
-     <height>500</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>64</width>
-     <height>524287</height>
+     <height>600</height>
     </size>
    </property>
    <attribute name="dockWidgetArea">
@@ -164,6 +159,29 @@ QMenuBar {
        <width>151</width>
        <height>41</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>CheckBox</string>
      </property>
     </widget>
    </widget>
@@ -351,6 +369,11 @@ QMenuBar {
   <action name="actionNormalMap">
    <property name="text">
     <string>法线贴图</string>
+   </property>
+  </action>
+  <action name="actionDrawBloom">
+   <property name="text">
+    <string>DrawBloom</string>
    </property>
   </action>
  </widget>

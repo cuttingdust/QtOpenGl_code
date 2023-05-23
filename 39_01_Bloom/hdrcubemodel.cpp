@@ -3,15 +3,15 @@
 
 // renderQuad() renders a 1x1 XY quad in NDC
 // -----------------------------------------
-static unsigned int quadVAO = 0;
-static unsigned int quadVBO;
+unsigned int quadVAO = 0;
+unsigned int quadVBO;
 // lighting info
 // -------------
 // positions
-static std::vector<QVector3D> lightPositions;
+std::vector<QVector3D> lightPositions;
 
 // colors
-static std::vector<QVector3D> lightColors;
+std::vector<QVector3D> lightColors;
 
 static unsigned int hdrFBO;
 static unsigned int colorBuffer;
