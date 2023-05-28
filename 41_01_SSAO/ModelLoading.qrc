@@ -1,0 +1,127 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>le.ico</file>
+        <file>images/awesomeface.png</file>
+        <file>images/wall.jpg</file>
+        <file>images/wood.png</file>
+        <file>images/small.png</file>
+        <file>images/grass.png</file>
+        <file>images/grass.png</file>
+        <file>images/brickwall.jpg</file>
+        <file>images/brickwall_normal.jpg</file>
+        <file>images/bricks2.jpg</file>
+        <file>images/bricks2_normal.jpg</file>
+        <file>images/bricks2_disp.jpg</file>
+        <file>images/blending_transparent_window.png</file>
+        <file>texMap/container2_specular.png</file>
+        <file>texMap/container2.png</file>
+        <file>texMap/lighting_maps_specular_color.png</file>
+        <file>texMap/matrix.jpg</file>
+        <file>skybox/back.jpg</file>
+        <file>skybox/bottom.jpg</file>
+        <file>skybox/front.jpg</file>
+        <file>skybox/left.jpg</file>
+        <file>skybox/right.jpg</file>
+        <file>skybox/top.jpg</file>
+    </qresource>
+    <qresource prefix="/shader">
+        <file>shapes.vert</file>
+        <file>shapes.geom</file>
+        <file>shapes.frag</file>
+    </qresource>
+    <qresource prefix="/lighting">
+        <file>lighting.vert</file>
+        <file>lighting.frag</file>
+    </qresource>
+    <qresource prefix="/outline">
+        <file>outline.vert</file>
+        <file>outline.frag</file>
+    </qresource>
+    <qresource prefix="/vegetation">
+        <file>vegetation.vert</file>
+        <file>vegetation.frag</file>
+    </qresource>
+    <qresource prefix="/windows">
+        <file>windows.vert</file>
+        <file>windows.frag</file>
+    </qresource>
+    <qresource prefix="/frambuffer">
+        <file>frambuffer.vert</file>
+        <file>frambuffer.frag</file>
+    </qresource>
+    <qresource prefix="/skybox">
+        <file>skybox.vert</file>
+        <file>skybox.frag</file>
+    </qresource>
+    <qresource prefix="/reflection">
+        <file>reflection.vert</file>
+        <file>reflection.frag</file>
+    </qresource>
+    <qresource prefix="/refraction">
+        <file>refraction.vert</file>
+        <file>refraction.frag</file>
+    </qresource>
+    <qresource prefix="/house">
+        <file>house.vert</file>
+        <file>house.geom</file>
+        <file>house.frag</file>
+    </qresource>
+    <qresource prefix="/normal">
+        <file>normal.vert</file>
+        <file>normal.geom</file>
+        <file>normal.frag</file>
+    </qresource>
+    <qresource prefix="/instancing">
+        <file>instancing.vert</file>
+        <file>instancing.frag</file>
+    </qresource>
+    <qresource prefix="/depthMap">
+        <file>depthMap.vert</file>
+        <file>depthMap.geom</file>
+        <file>depthMap.frag</file>
+    </qresource>
+    <qresource prefix="/quad">
+        <file>quad.vert</file>
+        <file>quad.frag</file>
+    </qresource>
+    <qresource prefix="/shadow">
+        <file>shadow.vert</file>
+        <file>shadow.frag</file>
+    </qresource>
+    <qresource prefix="/normalMap">
+        <file>normalMap.vert</file>
+        <file>normalMap.frag</file>
+    </qresource>
+    <qresource prefix="/hdr">
+        <file>hdrcube.frag</file>
+        <file>hdrcube.vert</file>
+        <file>hdrlighting.frag</file>
+        <file>hdrlighting.vert</file>
+    </qresource>
+    <qresource prefix="/bloom">
+        <file>bloomlighting.frag</file>
+        <file>bloomlighting.vert</file>
+        <file>bloomlight.frag</file>
+        <file>bloomlight.vert</file>
+        <file>bloomblur.frag</file>
+        <file>bloomblur.vert</file>
+        <file>bloom.frag</file>
+        <file>bloom.vert</file>
+    </qresource>
+    <qresource prefix="/DeferredShading">
+        <file>g_buffer.frag</file>
+        <file>g_buffer.vert</file>
+        <file>deferred_light_box.frag</file>
+        <file>deferred_light_box.vert</file>
+        <file>deferred_shading.frag</file>
+        <file>deferred_shading.vert</file>
+    </qresource>
+    <qresource prefix="/ssao">
+        <file>ssao_blurr.frag</file>
+        <file>ssao_gBuffer.frag</file>
+        <file>ssao_gBuffer.vert</file>
+        <file>SSAO.frag</file>
+        <file>SSAO.vert</file>
+        <file>SSAO_lighting.frag</file>
+    </qresource>
+</RCC>
