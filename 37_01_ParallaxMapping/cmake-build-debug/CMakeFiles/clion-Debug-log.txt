@@ -1,8 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping -B /Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/cmake-build-debug
--- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
--- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
-QTFILE=/Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/ModelLoading.qrc/Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/depthtestdialog.ui/Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/environmentsettingdialog.ui/Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/frambuffersettingdialog.ui/Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/mainwindow.ui/Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/shownormaldg.ui
-QT_VERSION_MAJOR= 6
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/handabao/MyFile/code/QtOpengl/37_01_ParallaxMapping/cmake-build-debug
